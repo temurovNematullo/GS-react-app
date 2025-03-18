@@ -337,7 +337,8 @@ h1,h2,h3,h4,h5,h6{
     text-decoration: none;
     font-weight:400;
     font-size: 20px;
-    letter-spacing: 1.2px;  
+    letter-spacing: 1.2px; 
+    cursor: pointer; 
     
 }
 
@@ -347,42 +348,47 @@ h1,h2,h3,h4,h5,h6{
   display: block;
 }
 
- /* Скрытое меню */
- .dropdown--menu {
-  display: none;
+
+ /* Основные стили для выпадающего меню */
+.dropdown--menu {
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  min-width: 150px;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0;
-  z-index: 10;
-}
-
-.dropdown--menu li {
-  list-style: none;
-}
-
-.dropdown--menu a {
-  display: block;
+  background-color: #FFFFFF; /* Белый фон */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  color: #333;
-  text-decoration: none;
+  list-style: none;
+  top: 50px; /* Смещение вниз */
+  left: 0;
+  width: 150px;
+  display: none; /* По умолчанию скрыто */
+  z-index: 1;
+ 
 }
 
-.dropdown--menu a:hover {
-  background-color: #f1f1f1;
-}
-
-/* Класс для показа меню */
-.show {
+/* Показываем меню, если state dropdownMenu === true */
+.dropdown--menu.active {
   display: block;
 }
 
-a:hover{
-    color: var(--color-lightgray);
+/* Стили для элементов меню */
+.dropdown--Item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: start;
+  font-weight: 400;
+  font-size: 20px;
+  color: black; 
+}
+
+/* Ховер эффект */
+.dropdown--Item:hover {
+  background-color: var(--color-button-hover); /* Голубой фон при наведении */
+  color: #FFFFFF; /* Белый текст */
+}
+
+.dropdown--Item.active {
+  background-color: var(--color-button); 
+  color: #FFFFFF; /* Белый текст */
 }
 
 .buy-button:hover, 
@@ -457,11 +463,18 @@ a:hover{
 }
 
 .product-image {
-  flex: 1;
   display: flex;
+  flex-direction: column;
+  row-gap: 25px;
   justify-content: center; /* Центрируем изображение */
   align-items: center;
-  max-width: 50%;
+  padding-top: 100px ;
+  width: 50%;
+ 
+}
+
+.pagination_img{
+  
 }
 
 .product-image img {
@@ -470,7 +483,7 @@ a:hover{
 }
 
 .product-info {
-  
+  width: 50%;
   text-align: left;
   padding-left: 50px; /* Отступ от изображения */
 }
@@ -520,6 +533,7 @@ h3{
   line-height: 24px;
   letter-spacing: 0%;
   text-align: left;
+  white-space: pre-line;
 }
 
 .product_price{
@@ -572,26 +586,7 @@ h3{
   opacity: 0.7;
 }
 
-.dots {
-  display: flex;
-  gap: 6px;
-}
 
-.dot {
-  width: 8px;
-  height: 8px;
-  background: #C4C4C4;
-  border-radius: 50%;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.dot.active {
-  width: 10px;
-  height: 10px;
-  background: black;
-  transform: scale(1.2);
-  border-radius: 50%;
-}
 
 
 .banner {
@@ -613,7 +608,7 @@ h3{
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 20px; /* Отступы между элементами */
+ column-gap: 40px; /* Отступы между элементами */
 }
 
 .banner_info-item {
@@ -621,7 +616,6 @@ h3{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* padding: 10px 20px; */
   color: black;
   font-family: var(--font-family-base);
 }
@@ -690,6 +684,11 @@ h3{
   
 }
 
+.loading{
+  width: 100px;
+  height: 100px;
+}
+
 .category_info-item {
   display: flex;
   flex-direction: column;
@@ -702,6 +701,7 @@ h3{
   background-position: center;
   color: var(--color-lightgray);
   position: relative;
+  background-image: url(../assets/img/фото.svg);
   
 }
 

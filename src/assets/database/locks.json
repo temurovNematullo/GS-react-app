@@ -1,0 +1,52 @@
+
+[
+        {
+            "id": 1,
+            "name": "Golden Soft GS-200Z-5",
+            "for": " для офиса",
+            "description": "Замок дверной электронный Golden Soft GS-200Z-5 имеет роскошный глянцевый блеск, четкие линии, красивые формы.",
+            "features": "Подходит для установки на деревянную/межкомнатную дверь.",
+            "price": {
+                "current": 33000,
+                "old": 37000,
+                "currency": "₽"
+            },
+            "imageUrl": [
+                "https://th.bing.com/th/id/OIP.RnWxTebQ8518Yh-ktg8OZQHaHa?rs=1&pid=ImgDetMain",
+                "https://th.bing.com/th/id/OIP.FZOfaa8Fy_GLKI_jbQ41RwHaHa?rs=1&pid=ImgDetMain"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Golden Soft GS-300X-7 ",
+            "for": " для дома",
+            "description": "Электронный замок Golden Soft GS-300X-7 идеально подходит для домашнего использования, обеспечивая надежную защиту.",
+            "features": "Совместим с металлическими и деревянными дверями.",
+            "price": {
+                "current": 45000,
+                "old": 50000,
+                "currency": "₽"
+            },
+            "imageUrl": [
+                 "https://th.bing.com/th/id/OIP.FZOfaa8Fy_GLKI_jbQ41RwHaHa?rs=1&pid=ImgDetMain",
+                "https://cdn.cloudbf.com/thumb/format/mini_xsize/upfile/177/product_o/New-Fashion-Smart-RFID-Hotel-Lock-System-DH8505-J_3.jpg.webp"
+               
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Golden Soft GS-400P-9 ",
+            "for": "для гостиниц",
+            "description": "Замок Golden Soft GS-400P-9 разработан специально для гостиниц, с функцией управления через приложение.",
+            "features": "Поддерживает удаленное управление и доступ по карте.",
+            "price": {
+                "current": 52000,
+                "old": 58000,
+                "currency": "₽"
+            },
+            "imageUrl": [
+                 "https://cdn.cloudbf.com/thumb/format/mini_xsize/upfile/177/product_o/New-Fashion-Smart-RFID-Hotel-Lock-System-DH8505-J_3.jpg.webp"
+            ]
+        }
+    ]
+

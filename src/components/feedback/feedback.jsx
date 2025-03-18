@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import '../../scss/style.css';
 
-export default function Callback (){
+export default function Feedback (){
 
     const {register, handleSubmit, reset,
             formState:{errors}
