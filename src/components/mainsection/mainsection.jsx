@@ -47,7 +47,7 @@ useEffect(() => {
 
 
   return (
-    
+    <>
       <section className="product">
         <button className="arrow left" onClick={prevLock}>
                         <img src={Left} alt="Left"/>
@@ -100,6 +100,9 @@ useEffect(() => {
                         <img src={Right} alt="Right"/>
                     </button>
         </section>
-   
+
+
+
+   </>
   );
 }

@@ -5,7 +5,9 @@ import Sale from "./components/sale/sale";
 import Main from "./pages/Main";
 import Feedback from "./components/feedback/feedback";
 import { Route, Routes, Navigate } from "react-router";
-import Categories from "./pages/CategoriesPage";
+import CategoriesPage from "./pages/CategoriesPage";
+import CatalogPage from "./pages/CatalogPage";
+import CharactericPage from "./pages/CharactericPage";
 
 function App() {
   return (
@@ -15,9 +17,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/Главная" />} />
         <Route path="/Главная" element={<Main />} />
-        <Route path="Все категории" element={<Categories />} />
-      </Routes>
+        <Route path="Все категории" element={<CategoriesPage />} />
 
+        <Route path="Каталог" element={<CatalogPage />} />
+        <Route
+          path="Каталог/Вариативный замок Golden Soft для отеля."
+          element={<CharactericPage />}
+        />
+      </Routes>
+      {/* <Popular_products /> */}
       <Feedback />
 
       <Footer />

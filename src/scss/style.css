@@ -1512,7 +1512,7 @@ padding-top: 80px;
 }
 
 .tables-content {
-  display: none;
+ 
 }
 
 .tables--characteristics{
@@ -1523,13 +1523,17 @@ padding-top: 80px;
   display: flex;
 }
 
-
 .description__text {
-  padding-top: 40px;
+  display:block;
+  align-items: start;
   width: 60%;
-  
 }
 
+.description__image{
+ 
+  width: 40%;
+  
+}
 
 
 .tables--description{

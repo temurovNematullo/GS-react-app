@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/icon/Logo.svg';
 import Call from '../../assets/icon/Call.svg';
 import Corz from '../../assets/icon/Corz.svg';  
@@ -6,17 +7,24 @@ import Like from '../../assets/icon/Like.svg';
 import { NavLink } from 'react-router';
 import '../../scss/style.css';
 
-export default function Header()
-{
+export default function Header(){ 
 
 const [dropdownMenu, setdropdownMenu] = useState(false);
-const [select, setSelect] = useState(0);
+const [select, setSelect] = useState();
+const [DropdownName, setDropdownName] = useState();
+const navigate = useNavigate();
 const DropdownNameList= ["Каталог","Товары", "Услуги", "Новинки", "Акции", "Скидки", "Подарки"];
-const DropdownName = DropdownNameList[select];
-console.log(DropdownName);
+
+useEffect(() => {
+    if (DropdownName !== null) {
+        navigate(DropdownName);
+        setdropdownMenu(false);
+    }
+}, [DropdownName]);
 
 const onClickSelect = (index) => {
     setSelect(index);
+    setDropdownName(DropdownNameList[index]);
     setdropdownMenu(false);
 }
 
@@ -38,7 +46,9 @@ const onClickSelect = (index) => {
                 </li>
 
                <li className="header_menu-item">
-                    <span onClick={() => setdropdownMenu(!dropdownMenu)} className="header_menu-link" id="catalogBtn">{DropdownName}</span>
+                  <NavLink to={DropdownName} className="header_menu-link" id="catalogBtn" onClick={() => setdropdownMenu(!dropdownMenu)}>
+                    {select ? DropdownName : "Каталог"}
+                  </NavLink>
 
                     <ul className={`dropdown--menu ${dropdownMenu ? "active" : ""}`} id="dropdownMenu">
                         {DropdownNameList.map((item, index)=>(
