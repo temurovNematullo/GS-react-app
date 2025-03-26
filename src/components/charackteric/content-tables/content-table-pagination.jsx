@@ -12,9 +12,9 @@ console.log(activeTab)
         <>
         <div class="vcladki">
         <ul class="vcladki_list">
-            <li class="vcladki_item active" data-tab="characteristics" onClick={()=> setactiveTab("characteric")} >Характеристики</li>
-            <li  class="vcladki_item" data-tab="description" onClick={()=> setactiveTab("description")} >Описание</li>
-            <li class="vcladki_item" data-tab="reviews" onClick={()=> setactiveTab("reviews")}>Отзывы</li>
+            <li class={`vcladki_item ${activeTab === "characteric" ? "active" : ""}`}  data-tab="characteric" onClick={()=> setactiveTab("characteric") } >Характеристики</li>
+            <li  class={`vcladki_item ${activeTab === "description" ? "active" : ""}`}  data-tab="description" onClick={()=> setactiveTab("description")} >Описание</li>
+            <li class={`vcladki_item ${activeTab === "reviews" ? "active" : ""}`}  data-tab="reviews" onClick={()=> setactiveTab("reviews")}>Отзывы</li>
         </ul>
     </div>
 

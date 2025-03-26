@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../scss/style.css';
+import Return from "../../assets/img/return.svg"
 
 function WhyGS() {
     return (
@@ -11,7 +12,7 @@ function WhyGS() {
             <ul class="whyGS_info-list">
            
                 <li class="whyGS_info-item">
-                    <img src="/img/return.svg" alt="" class="whyGS_info-img"/>
+                    <img src={Return} alt="" class="whyGS_info-img"/>
                     <span class="whyGS_info-text">Возврат удвоенной стоимости каждого замка в случае брака. </span>
                 </li>
             

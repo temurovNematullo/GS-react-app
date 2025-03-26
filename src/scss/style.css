@@ -2084,6 +2084,9 @@ height: 14px;
   background-color: var(--color-button-hover);
 }
 
+.showall:disabled{
+  background-color: lightslategray;
+}
 
   @media (max-width: 1080px){
     .header{

@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
-
+import { fetchCatalogData , setCurrentPage} from '../../redux/Slices/catalogCardsSlice';
+import Preloader from '../../assets/preloader/Preloader';
+import have from '../../assets/img/have.svg'
+import donthave from '../../assets/img/donthave.svg'
+import podarok from '../../assets/img/podaroc.svg'
 
 const Catalog = () => {
+const dispatch = useDispatch()
+const {cards, status, page, limits, totalPage} = useSelector(state=> state.catalogCards)
+console.log(page)
+
+const changePage =(newPage)=>{
+   
+        dispatch(setCurrentPage(newPage));
+      
+}
+
+useEffect(()=>{
+    console.log("Вызов useEffect, page =", page);
+dispatch(fetchCatalogData())
+
+},[page, dispatch])
+console.log(cards)
     return (
         <>
         <section className="catalog-section" id="catalog-section">
@@ -117,34 +138,37 @@ const Catalog = () => {
                     </div>
 
                     <ul id="catalogContainer" className="catalog-list">
-                        <li className="product-card">
+                       {status === "loading" ? <Preloader/> : cards.map((cardInfo) => ( <li key={cardInfo.id} className="product-card">
+                       
                             <div className="product-card__labels">
-                                <img src="/img/donthave.svg" alt="Нет в наличии" />
-                                <span className="product-card__status">Нет в наличии</span>
-                                <span className="product-card__sale">sale</span>
+                            {cardInfo.status ? <> <img src={have} alt="В наличии" />
+                                <span className="product-card__status">В наличии</span> </> : <> <img src={donthave} alt="Нет в наличии" />
+                                <span className="product-card__status">Нет в наличии</span> </>}
+                               {cardInfo.oldPrice &&  <span className="product-card__sale">sale</span>}
+                               
                             </div>
-
-                            <div className="product-card__gift">
-                                <img src="/img/podaroc.svg" alt="Подарок" />
+                           {cardInfo.isGift ?  <div className="product-card__gift">
+                                <img src={podarok} alt="Подарок" />
                                 <span>Подарок</span>
-                            </div>
-
+                            </div>: ""}
+                         
                             <NavLink to="Вариативный замок Golden Soft для отеля." className="product-card__image">
-                                <img src="/img/productcard (1).svg" alt="Вариативный замок Golden Soft для отеля." />
+                                <img src={cardInfo.image} alt="Вариативный замок Golden Soft для отеля." />
                             </NavLink>
 
                             <div className="product-card__info">
-                                <p className="product-card__title">Вариативный замок Golden Soft для отеля.</p>
+                                <p className="product-card__title">{cardInfo.title}</p>
                                 <div className="product-card__price">
-                                    <span className="product-card__new-price">7 000₽</span>
-                                    <span className="product-card__old-price">8 000₽</span>
+                                    <span className="product-card__new-price">{cardInfo.newPrice}</span>
+                                    <span className="product-card__old-price">{cardInfo.oldPrice}</span>
                                 </div>
                             </div>
-                        </li>
+                        </li>  ))}
                     </ul>
                 </div>
                 <div className="catalog--pagination">
                     <span className="pagination-dots"></span>
+                    <button onClick={() => changePage(page + 1)}>Next</button> <button onClick={() => changePage(page - 1)}>Prev</button>
                 </div>
             </div>
         </section>
