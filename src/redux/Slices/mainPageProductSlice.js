@@ -1,17 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { mainsectionAPI } from "../../API/api";
 
 const initialState = {
   id: 1,
-  name: "",
-  for: "",
-  description: "",
-  features: "",
-  price: {
-    current: null,
-    old: null,
-    currency: "",
-  },
-  imageUrl: [],
+  mainProducts: [],
 };
 
 const mainPAgeProductSlice = createSlice({
@@ -23,18 +15,22 @@ const mainPAgeProductSlice = createSlice({
       state.id = action.payload;
     },
     setMainProduct(state, action) {
-      state.id = action.payload;
-      state.description = action.payload;
-      state.features = action.payload;
-      state.for = action.payload;
-      state.name = action.payload;
-      state.price.currency = action.payload;
-      state.price.old = action.payload;
-      state.price.current = action.payload;
-      state.imageUrl = action.payload;
+      state.mainProducts = action.payload;
     },
   },
 });
+
+export const fetchMainProducts = createAsyncThunk(
+  "mainpage/productMain",
+  async (_, { getState, dispatch }) => {
+    try {
+      const data = await mainsectionAPI.getLocks();
+      dispatch(setMainProduct(data));
+    } catch (error) {
+      console.error("ERROR лять", error);
+    }
+  }
+);
 
 export const { setMainProductId, setMainProduct } =
   mainPAgeProductSlice.actions;

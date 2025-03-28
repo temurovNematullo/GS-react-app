@@ -1,39 +1,59 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router';
+import Preloader from '../../assets/preloader/Preloader';
+import have from '../../assets/img/have.svg'
+import donthave from '../../assets/img/donthave.svg'
+import podarok from '../../assets/img/podaroc.svg'
+import { getRecentlyViewed } from "../../redux/Slices/recentlyViewedSlice";
+import { useHorizontalScroll } from '../../assets/customHooks/useHorizontalScroll';
+
 export default function RecentlyVeiwed (){
+  const dispatch = useDispatch()
+  const {recentlyViewed, status} = useSelector(state=> state.recentlyViewedReducer)
+ const {scrollLeft, scrollRight, listRef} = useHorizontalScroll()
+
+  useEffect(()=>{
+    dispatch(getRecentlyViewed())
+  }, [recentlyViewed])
+
     return(
         <section class="productcard">
         <h2 class="productcar_header">Вы недавно просмотрели
         <div class="productcard-scrol">
-            <button class="productcard-left">left</button>
-            <button class="productcard-right">right</button>
+            <button class="productcard-left" onClick={scrollLeft}></button>
+            <button class="productcard-right"onClick={scrollRight}></button>
         </div>
     </h2>
-        <ul class="Cartochka" id="productCards">
-        <li class="product-card">
-        <div class="product-card__labels">
-          <img src="/img/donthave.svg" alt="Нет в наличии" loading="lazy"/>
-          <span class="product-card__status">Нет в наличии</span>
-          <span class="product-card__sale">sale</span>
-        </div>
+        <ul ref={listRef} class="Cartochka" id="productCards">
+          
+        {status === "loading" ? <Preloader/> : recentlyViewed.map((cardInfo) => ( <li key={cardInfo.id} className="product-card">
         
-        
-          <div class="product-card__gift">
-            <img src="/img/podaroc.svg" alt="Подарок" loading="lazy"/>
-            <span>Подарок</span>
-          </div>
-        
-  
-        <div class="product-card__image">
-          <img src="/img/productcard (1).svg" alt="Вариативный замок Golden Soft для отеля." loading="lazy"/>
-        </div>
-        
-        <div class="product-card__info">
-          <p class="product-card__title">Вариативный замок Golden Soft для отеля.</p>
-          <div class="product-card__price">
-            <span class="product-card__new-price">7 000₽</span>
-            <span class="product-card__old-price">8 000</span>
-          </div>
-        </div>
-      </li>
+                       <div className="product-card__labels">
+                       {cardInfo.status ? <> <img src={have} alt="В наличии" />
+                           <span className="product-card__status">В наличии</span> </> : <> <img src={donthave} alt="Нет в наличии" />
+                           <span className="product-card__status">Нет в наличии</span> </>}
+                          {cardInfo.oldPrice &&  <span className="product-card__sale">sale</span>}
+                          
+                       </div>
+                      {cardInfo.isGift ?  <div className="product-card__gift">
+                           <img src={podarok} alt="Подарок" />
+                           <span>Подарок</span>
+                       </div>: ""}
+                    
+                       <NavLink to={`/Каталог/${cardInfo.id}`} className="product-card__image">
+                           <img src={cardInfo.image} alt="Вариативный замок Golden Soft для отеля." />
+                       </NavLink>
+
+                       <div className="product-card__info">
+                           <p className="product-card__title">{cardInfo.title}</p>
+                           <div className="product-card__price">
+                               <span className="product-card__new-price">{cardInfo.newPrice}</span>
+                               <span className="product-card__old-price">{cardInfo.oldPrice}</span>
+                             
+                           </div>
+                       </div>
+                   </li>  ))}
         </ul>
     </section>
     )

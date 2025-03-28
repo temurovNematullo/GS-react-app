@@ -1,47 +1,3 @@
-@font-face {
-    font-family:'San Francisco Pro Display';
-    src: url(../assets/font/SFProDisplay-Light.woff2) format(woff2); 
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-
-}
-
-@font-face {
-  font-family:'San Francisco Pro Display';
-  src: url(../assets/font/SFProDisplay-Bold.woff2) format(woff2); 
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-
-}
-
-@font-face {
-  font-family:'San Francisco Pro Text';
-  src: url(../assets/font/SFProText-Light.woff2) format(woff2); 
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-
-}
-
-@font-face {
-  font-family:'San Francisco Pro Text';
-  src: url(../assets/font/SFProText-Bold.woff2) format(woff2); 
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-
-}
-
-@font-face {
-  font-family:'San Francisco Pro Display';
-  src: url(../assets/font/SFProDisplay-Medium.woff2) format(woff2); 
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-
-}
 
 /**
   Нормализация блочной модели
@@ -353,14 +309,14 @@ h1,h2,h3,h4,h5,h6{
 .dropdown--menu {
   position: absolute;
   background-color: #FFFFFF; /* Белый фон */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px ;
   padding: 10px;
   list-style: none;
   top: 50px; /* Смещение вниз */
   left: 0;
   width: 150px;
   display: none; /* По умолчанию скрыто */
-  z-index: 1;
+  z-index: 11;
  
 }
 
@@ -764,7 +720,7 @@ h3{
 }
 
 
-.popular_product-right::before,
+.popular_product-left::before,
 .productcard-left::before  {
   content: url(../assets/icon/scrolRight.svg); /* Стрелка влево */
   font-size: 20px;
@@ -779,16 +735,31 @@ h3{
 }
 
 
+.popular_product-list::-webkit-scrollbar {
+  display: none; /* Для Chrome, Safari */
+}
 
-
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2); /* Затемнение */
+  z-index: 10;
+}
 
 .popular_product-list{
-  display: flex; /* Включаем Flexbox */
-  justify-content: space-between; 
+  display: flex; /* Включаем Flexbox */ 
   align-items: center;
   padding-inline: 100px;
-  gap: 40px;
-}
+  column-gap: 40px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  overflow-y: hidden; 
+  height: 100%;
+  padding-bottom: 20px;
+  }
 .popular_product-item{
   width: 290px;
   height: 455px;
@@ -799,7 +770,6 @@ h3{
   width: 290px;
   height: 320px;
   z-index: -1;
-  
   border-bottom: none;
 }
 
@@ -1372,6 +1342,7 @@ th{
   width: 290px;
   height: 320px;
   text-align: start;
+  margin-bottom: 100px;
 }
 
 /* Верхние метки */
@@ -1711,7 +1682,7 @@ font-weight: 300;
 .catalog-list {
   display: grid;
   grid-template-columns: repeat(3, 290px); /* 3 столбца по 290px */
-  row-gap: 140px;
+  row-gap: 30px;
   column-gap: 30px;
   padding: 0;
   justify-content: end;
@@ -2423,18 +2394,7 @@ height: 14px;
   padding: 20px;
 }
 
-.popular_product-list {
-  display: flex;
-  gap: 15px; /* Отступ между карточками */
-  overflow-x: auto; /* Горизонтальный скролл */
-  white-space: nowrap; /* Запрещает перенос элементов */
-  padding-bottom: 10px;
-  scrollbar-width: none; /* Скрываем скроллбар в Firefox */
-}
 
-.popular_product-list::-webkit-scrollbar {
-  display: none; /* Полное скрытие скроллбара в Chrome, Safari, Edge */
-}
 
 /* Карточки товаров */
 .popular_product-item {

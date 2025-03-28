@@ -1,32 +1,27 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../../scss/style.css';
-import { mainsectionAPI } from '../../API/api';
 import { useEffect, useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../redux/Slices/categoriesSlice';
 
 const Categories = () => {
+    const dispatch = useDispatch()
+const {categories} = useSelector((state)=> state.categories)
+
+
 const navigate = useNavigate();
 
 const handleClick = (link) => {
     navigate(link)
 }
 
-const [categories, setCategories] = useState([]);
-const[page] = useState(1);
-const[limit] = useState(4);
-
-
 
     useEffect(() => {
-        
-        ( async () => {
-            const data = await mainsectionAPI.getCategories(page, limit);
-            // setCategories(prevCategories =>[...prevCategories, ...data]);
-            setCategories(data);
-
-        })()
-    },[page, limit]);
+       
+        dispatch(fetchCategories());
+       
+    },[]);
 
     return (
         <section class="category">
@@ -36,7 +31,7 @@ const[limit] = useState(4);
                     {categories.map((item) => (
                         <li class="category_info-item" key={item.id}>
                             <span class="category_info-text">{item.name}</span>
-                            <button onClick={()=>handleClick(item.link)} class="category_info-button">Перейти</button>
+                            <button onClick={()=>handleClick(item.id)} class="category_info-button">Перейти</button>
                         </li>
                     ))}
                 </ul>

@@ -1,28 +1,46 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
-import { fetchCatalogData , setCurrentPage} from '../../redux/Slices/catalogCardsSlice';
+import { fetchCatalogData , setCurrentPage, setParams} from '../../redux/Slices/catalogCardsSlice';
 import Preloader from '../../assets/preloader/Preloader';
 import have from '../../assets/img/have.svg'
 import donthave from '../../assets/img/donthave.svg'
 import podarok from '../../assets/img/podaroc.svg'
+import { putRecentlyCards} from "../../redux/Slices/recentlyViewedSlice";
 
 const Catalog = () => {
 const dispatch = useDispatch()
-const {cards, status, page, limits, totalPage} = useSelector(state=> state.catalogCards)
-console.log(page)
+const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
+const {recentlyViewed} = useSelector(state=> state.recentlyViewedReducer)
 
-const changePage =(newPage)=>{
-   
-        dispatch(setCurrentPage(newPage));
-      
+const changePage =(newPage)=>{   
+        dispatch(setCurrentPage(newPage));   
+}
+
+const changeFilter = (event)=>{
+
+    const value = event.target.value
+    if(value === "min--priceFilter"){
+    dispatch(setParams({ sortBy: "newPrice", order: "asc" }));
+    }
+    if(value === "max--priceFilter"){
+        dispatch(setParams({ sortBy: "newPrice", order: "desc" }));
+    }
+    value === "product--haveFilter" && dispatch(setParams({sortBy: "status", order: "desc"}))
+}
+
+const ResetFilter = ()=>{
+
+}
+
+const handleClick =(cardInfo)=>{
+    console.log("Клик по товару:", cardInfo);
+    dispatch(putRecentlyCards(cardInfo))
 }
 
 useEffect(()=>{
-    console.log("Вызов useEffect, page =", page);
 dispatch(fetchCatalogData())
-
-},[page, dispatch])
+},[page, sortBy, hasMore, order, dispatch])
 console.log(cards)
     return (
         <>
@@ -36,10 +54,11 @@ console.log(cards)
                     <span className="have--filters">
                         Электронные кодовые замки <img src="/icon/cancel.svg" alt="" loading="lazy" />
                     </span>
-                    <select name="" id="" className="filter--product">
-                        <option value="popular--product">Популярные</option>
-                        <option value="min--priceFilter">Низкая цена</option>
-                        <option value="max--priceFilter">Максимальная цена</option>
+                    <select name="" id="" className="filter--product" onChange={changeFilter}>
+                        <option value="filter--list">Сортировка</option>
+                        <option value="product--haveFilter">В наличии</option>
+                        <option value="min--priceFilter">По убыванию цен</option>
+                        <option value="max--priceFilter">По возрастанию цен</option>
                     </select>
                 </div>
 
@@ -152,7 +171,7 @@ console.log(cards)
                                 <span>Подарок</span>
                             </div>: ""}
                          
-                            <NavLink to="Вариативный замок Golden Soft для отеля." className="product-card__image">
+                            <NavLink to={`/Каталог/${cardInfo.id}`} onClick={() => handleClick(cardInfo)} className="product-card__image">
                                 <img src={cardInfo.image} alt="Вариативный замок Golden Soft для отеля." />
                             </NavLink>
 
@@ -168,7 +187,7 @@ console.log(cards)
                 </div>
                 <div className="catalog--pagination">
                     <span className="pagination-dots"></span>
-                    <button onClick={() => changePage(page + 1)}>Next</button> <button onClick={() => changePage(page - 1)}>Prev</button>
+                    <button disabled = {hasMore} onClick={() => changePage(page - 1)}>Prev</button> <button disabled = {!hasMore} onClick={() => changePage(page + 1)}>NExt</button>
                 </div>
             </div>
         </section>

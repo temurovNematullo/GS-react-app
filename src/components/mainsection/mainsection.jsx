@@ -3,39 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../../scss/style.css';
 import Left from '../../assets/icon/Left.svg';
 import Right from '../../assets/icon/Right.svg';
-import { mainsectionAPI } from '../../API/api';
 import Preloader from '../../assets/preloader/Preloader';
-import { setMainProductId } from '../../redux/Slices/mainPageProductSlice';
+import { fetchMainProducts, setMainProductId } from '../../redux/Slices/mainPageProductSlice';
 
 export default function Mainsection() {
-    const productId = useSelector((state) => state.mainPageProductReducer.id);
 
+const {mainProducts, id} = useSelector((state)=> state.mainPageProductReducer)
+console.log(mainProducts)
     const dispatch = useDispatch();
 
-    const [getLocks, setLocks] = useState([]);
-
-    const [currentLock, setCurrentLock] = useState(null); // Добавлено состояние для currentLock
+    const [currentLock, setCurrentLock] = useState(null); 
     const [currentindexIMG, setCurrentindexIMG] = useState(0);
 
-    // Обновление currentLock при изменении productId или getLocks
+
     useEffect(() => {
+           dispatch(fetchMainProducts())
+          
+        
+    }, []);
 
-        (async () => {
-            const data = await mainsectionAPI.getLocks();
-            setLocks(data);
-        })();
-
-        if (getLocks.length > 0) {
-            setCurrentLock(getLocks[productId]);
+    useEffect(()=>{
+        if (mainProducts.length > 0) {
+            setCurrentLock(mainProducts[id]);
         }
-    }, [productId, getLocks]); // Массив зависимостей гарантирует выполнение при изменении productId или getLocks
+    }, [id, mainProducts])
 
     const nextLock = () => {
-        dispatch(setMainProductId((productId + 1) % getLocks.length));
+        dispatch(setMainProductId((id + 1) % mainProducts.length));
     };
 
     const prevLock = () => {
-        dispatch(setMainProductId((productId - 1 + getLocks.length) % getLocks.length));
+        dispatch(setMainProductId((id - 1 + mainProducts.length) % mainProducts.length));
     };
 
     const nextIMG = () => {
@@ -59,7 +57,7 @@ export default function Mainsection() {
                     <img src={Left} alt="Left" />
                 </button>
                 <div className="product-image">
-                    {getLocks.length > 0 ? (
+                    {mainProducts.length > 0 ? (
                         <>
                             {/* Исправлен некорректный индекс для изображения */}
                             <img
@@ -79,7 +77,7 @@ export default function Mainsection() {
                         <Preloader />
                     )}
                 </div>
-                {getLocks.length > 0 ? (
+                {mainProducts.length > 0 ? (
                     <div className="product-info">
                         <h2 className="product-name">{currentLock?.name}</h2>
                         <h2 className="product-for">{currentLock?.for}</h2>

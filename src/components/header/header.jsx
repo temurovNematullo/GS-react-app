@@ -49,7 +49,7 @@ const onClickSelect = (index) => {
                   <NavLink to={DropdownName} className="header_menu-link" id="catalogBtn" onClick={() => setdropdownMenu(!dropdownMenu)}>
                     {select ? DropdownName : "Каталог"}
                   </NavLink>
-
+{dropdownMenu && (<div className="overlay" onClick={() => setdropdownMenu(false)}></div>)}
                     <ul className={`dropdown--menu ${dropdownMenu ? "active" : ""}`} id="dropdownMenu">
                         {DropdownNameList.map((item, index)=>(
                             <li key={index} className={`dropdown--Item ${select === index ? "active": ""}`} onClick={()=>onClickSelect(index)} >{item}</li>

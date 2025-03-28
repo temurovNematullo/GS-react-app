@@ -20,10 +20,7 @@ function App() {
         <Route path="Все категории" element={<CategoriesPage />} />
 
         <Route path="Каталог" element={<CatalogPage />} />
-        <Route
-          path="Каталог/Вариативный замок Golden Soft для отеля."
-          element={<CharactericPage />}
-        />
+        <Route path="/Каталог/:id" element={<CharactericPage />} />
       </Routes>
       {/* <Popular_products /> */}
       <Feedback />

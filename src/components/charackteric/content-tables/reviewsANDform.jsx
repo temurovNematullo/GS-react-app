@@ -1,8 +1,18 @@
 import { useForm } from "react-hook-form"
 import "../../../scss/style.css"
 import refresh from "../../../assets/icon/refresh.svg"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { fetchReviews } from "../../../redux/Slices/reviewsSlice"
 
 export default function ReviewsAndForm(){
+    const dispatch = useDispatch()
+const {reviews} = useSelector((state)=> state.reviewsReducer)
+console.log(reviews)
+
+useEffect(()=>{
+    dispatch(fetchReviews())
+},[])
 
 const{
     register,
@@ -21,26 +31,30 @@ console.log(data)
 <div class="tables-content tables--reviews" >
     <div class="reviewsConteiner">
     <div class="reviews--container" id="reviews-container">
-    <div class="tables--reviews__list">
-              <div class="reviews--head">
-                  <p class="reviews--clientName">Андрей Попенко</p>
-                  <time datetime="2021-08-20">20 августа 2021 г.</time>
-                  <div class="reviews--star"><span class="characteric-star_empty"></span><span class="characteric-star_empty"></span><span class="characteric-star_empty"></span><span class="characteric-star "></span><span class="characteric-star "></span></div>
-              </div>
-              <div class="text--reviews">
-                  <span>Et feugiat eu scelerisque nulla mattis...</span>
-              </div>
-              <div class="reviews--feedback">
-                  <div class="reviews--answer">
-                      <img src="/icon/answer.svg" alt="" loading="lazy"/>
-                      <span>Ответить</span>
-                  </div>
-                  <div class="reviews--comment">
-                      <img src="/icon/comment.svg" alt="" loading="lazy"/>
-                      <span class="comments--count">Комментарий</span>
-                  </div>
-              </div>
-          </div>
+        {reviews.map((item)=> (
+             <div class="tables--reviews__list">
+             <div class="reviews--head">
+                 <p class="reviews--clientName">{item.name}</p>
+                 <time datetime="2021-08-20">{item.data}</time>
+                 <div class="reviews--star"><span class="characteric-star_empty"></span><span class="characteric-star_empty"></span><span class="characteric-star_empty"></span><span class="characteric-star "></span><span class="characteric-star "></span></div>
+             </div>
+             <div class="text--reviews">
+                 <span>{item.text_reviews}</span>
+             </div>
+             <div class="reviews--feedback">
+                 <div class="reviews--answer">
+                     <img src="/icon/answer.svg" alt="" loading="lazy"/>
+                     <span>Ответить</span>
+                 </div>
+                 <div class="reviews--comment">
+                     <img src="/icon/comment.svg" alt="" loading="lazy"/>
+                     <span class="comments--count">Комментарий</span>
+                 </div>
+             </div>
+         </div>
+         ))}
+   
+          
     </div>
   
     <div class="reviews--feedback__button" id="toggle-reviews-btn">
@@ -54,11 +68,11 @@ console.log(data)
 <div class="reviews-inputlist"> 
 <span>Ваша оценка</span>
 <div class="reviews--star">
-    <span class="characteric-star"></span>
-    <span class="characteric-star"></span>
-    <span class="characteric-star"></span>
-    <span class="characteric-star"></span>
-    <span class="characteric-star"></span>
+    <span class="characteric-star_empty"></span>
+    <span class="characteric-star_empty"></span>
+    <span class="characteric-star_empty"></span>
+    <span class="characteric-star_empty"></span>
+    <span class="characteric-star_empty"></span>
  </div>
 
  <span>Ваше Имя</span>
