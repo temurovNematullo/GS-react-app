@@ -11,7 +11,6 @@ import { putRecentlyCards} from "../../redux/Slices/recentlyViewedSlice";
 const Catalog = () => {
 const dispatch = useDispatch()
 const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
-const {recentlyViewed} = useSelector(state=> state.recentlyViewedReducer)
 
 const changePage =(newPage)=>{   
         dispatch(setCurrentPage(newPage));   
@@ -29,9 +28,6 @@ const changeFilter = (event)=>{
     value === "product--haveFilter" && dispatch(setParams({sortBy: "status", order: "desc"}))
 }
 
-const ResetFilter = ()=>{
-
-}
 
 const handleClick =(cardInfo)=>{
     console.log("Клик по товару:", cardInfo);
@@ -40,7 +36,7 @@ const handleClick =(cardInfo)=>{
 
 useEffect(()=>{
 dispatch(fetchCatalogData())
-},[page, sortBy, hasMore, order, dispatch])
+},[page, sortBy, order, dispatch])
 console.log(cards)
     return (
         <>
@@ -195,4 +191,4 @@ console.log(cards)
     );
 };
 
-export default Catalog;
+export default React.memo(Catalog);

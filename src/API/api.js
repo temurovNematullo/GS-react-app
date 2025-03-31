@@ -65,4 +65,10 @@ export const catalogAPI = {
   getRecentlyViewed() {
     return instance3.get("recentlyViewed").then((response) => response.data);
   },
+
+  postReview(reviewsData) {
+    return instance3
+      .post("reviews", reviewsData)
+      .then((response) => response.data);
+  },
 };

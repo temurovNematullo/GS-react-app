@@ -3,6 +3,7 @@ import "../../scss/style.css"
 import floatimg from "../../assets/img/floatimg (1).svg"
 
 const InfoProduct = () => {
+    console.log("ля и я чтоль ска")
     return (
         <section class="information" id="informationlist">
         <div class="information_list" >

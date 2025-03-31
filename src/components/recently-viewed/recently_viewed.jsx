@@ -8,15 +8,15 @@ import podarok from '../../assets/img/podaroc.svg'
 import { getRecentlyViewed } from "../../redux/Slices/recentlyViewedSlice";
 import { useHorizontalScroll } from '../../assets/customHooks/useHorizontalScroll';
 
-export default function RecentlyVeiwed (){
+ function RecentlyVeiwed (){
   const dispatch = useDispatch()
   const {recentlyViewed, status} = useSelector(state=> state.recentlyViewedReducer)
  const {scrollLeft, scrollRight, listRef} = useHorizontalScroll()
 
   useEffect(()=>{
     dispatch(getRecentlyViewed())
-  }, [recentlyViewed])
-
+  }, [])
+console.log("Я тоже далбаеб",recentlyViewed)
     return(
         <section class="productcard">
         <h2 class="productcar_header">Вы недавно просмотрели
@@ -58,3 +58,4 @@ export default function RecentlyVeiwed (){
     </section>
     )
 }
+export default React.memo(RecentlyVeiwed)

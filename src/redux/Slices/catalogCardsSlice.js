@@ -41,24 +41,24 @@ const catalogCArdsReducer = createSlice({
   },
 });
 
-export const fetchTotalPages = createAsyncThunk(
-  "catalogCards/fetchTotalPages",
-  async (_, { getState, dispatch }) => {
-    console.log("fetchTotalPages вызван!");
-    try {
-      const { limit } = getState().catalogCards;
-      console.log("Запрашиваем общее количество записей...");
-      const total = await catalogAPI.getTotal();
-      const calculatedTotalPage = Math.ceil(total / limit);
-      console.log("Total записей:", total);
-      console.log("Рассчитанное totalPage:", calculatedTotalPage);
-      dispatch(setTotalPage(calculatedTotalPage));
-    } catch (error) {
-      console.error(error);
-      console.log("Ошибка при получении общего количества страниц", error);
-    }
-  }
-);
+// export const fetchTotalPages = createAsyncThunk(
+//   "catalogCards/fetchTotalPages",
+//   async (_, { getState, dispatch }) => {
+//     console.log("fetchTotalPages вызван!");
+//     try {
+//       const { limit } = getState().catalogCards;
+//       console.log("Запрашиваем общее количество записей...");
+//       const total = await catalogAPI.getTotal();
+//       const calculatedTotalPage = Math.ceil(total / limit);
+//       console.log("Total записей:", total);
+//       console.log("Рассчитанное totalPage:", calculatedTotalPage);
+//       dispatch(setTotalPage(calculatedTotalPage));
+//     } catch (error) {
+//       console.error(error);
+//       console.log("Ошибка при получении общего количества страниц", error);
+//     }
+//   }
+// );
 
 export const fetchCatalogData = createAsyncThunk(
   "catalogCards/fetchCatalogData",
@@ -73,6 +73,8 @@ export const fetchCatalogData = createAsyncThunk(
       //   await dispatch(fetchTotalPages());
       // }
       const data = await catalogAPI.getCatalogCards(page, limit, sortBy, order);
+      console.log("Данные из API:", data);
+
       dispatch(setCatalogCardsData(data));
       const hasMoreData = data.length === limit;
       dispatch(setHasMore(hasMoreData));
