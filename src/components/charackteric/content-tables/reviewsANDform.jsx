@@ -4,19 +4,20 @@ import refresh from "../../../assets/icon/refresh.svg"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { fetchReviews, postReviews, setLimit } from "../../../redux/Slices/reviewsSlice"
+import { useParams } from "react-router"
 
 
 export default function ReviewsAndForm(){
     const dispatch = useDispatch()
-
+const productId= useParams()
 const {reviews, page} = useSelector((state)=> state.reviewsReducer)
 const rating = [1,2,3,4,5]
-
+const reviewsCount = reviews?.length || 0;
 const [selectedStars, setSelectedStars] = useState()
 
 useEffect(()=>{
-    dispatch(fetchReviews())
-},[page])
+    dispatch(fetchReviews(productId.id))
+},[page, reviewsCount])
 
 const{
     register,
@@ -36,7 +37,7 @@ const formatDate = () => {
 
 
 const onSubmit =(data)=>{
-const reviewsData = ({...data, date: formatDate(),  rating: selectedStars })
+const reviewsData = ({...data, date: formatDate(),  rating: selectedStars, productId: productId.id })
 dispatch(postReviews(reviewsData))
 reset()
 setSelectedStars(0)

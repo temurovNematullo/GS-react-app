@@ -3,7 +3,7 @@ import { catalogAPI } from "../../API/api";
 
 const initialState = {
   reviews: [],
-  limit: 3,
+  limit: 1000,
   page: 1,
 };
 
@@ -22,14 +22,17 @@ const reviewsSlice = createSlice({
 
 export const fetchReviews = createAsyncThunk(
   "catalog/Reviews",
-  async (_, { getState, dispatch }) => {
+  async (productId, { getState, dispatch }) => {
     try {
       const { limit, page, reviews } = getState().reviewsReducer;
       const data = await catalogAPI.getReviews(limit, page);
+      const reviewsData = data.filter(
+        (dataReviews) => dataReviews.productId === productId
+      );
       if (page === 1) {
-        dispatch(setReviews(data));
+        dispatch(setReviews(reviewsData));
       } else {
-        dispatch(setReviews([...reviews, ...data]));
+        dispatch(setReviews([...reviews, ...reviewsData]));
       }
     } catch (error) {
       console.error("ERROR", error);

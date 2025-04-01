@@ -72,3 +72,15 @@ export const catalogAPI = {
       .then((response) => response.data);
   },
 };
+
+export const charactericAPI = {
+  getCharacteric() {
+    return instance2
+      .get("catalogProductCards")
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("Ошибка в API-запросе:", error);
+        throw error;
+      });
+  },
+};

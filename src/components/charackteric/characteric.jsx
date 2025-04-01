@@ -1,38 +1,56 @@
 import "../../scss/style.css";
 import like from "../../assets/icon/Corz.svg";
-import indeximg from "../../assets/img/indeximg.svg";
-
-
 import Tabulate from "./content-tables/content-table-pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { fetchCharactericProduct } from "../../redux/Slices/charactericSlice";
+import { NavLink, useParams } from "react-router";
 
 export default function Characteric() {
+    const productId = useParams()
+    const reviewsRef = useRef()
+    const dispatch = useDispatch()
+const {charactericProduct} = useSelector((state)=> state.charactericReducer)
+console.log("charactericProduct",charactericProduct)
+const rating = [1,2,3,4,5]
+const {reviews, page} = useSelector((state)=> state.reviewsReducer)
+
+const reviewsCount = reviews?.length || 0;
+
+
+const scrollToReviews = ()=>{
+    if(reviewsRef.current){
+        reviewsRef.current.scrollIntoView({behavior: "smooth", block: "start"})
+    }
+}
+
+useEffect(()=>{
+    
+    dispatch(fetchCharactericProduct(productId))
+   
+},[])
+
   return (
     <>
     <section class="characteric-index" id="charactericindex">
     <ul class="characteric-index_list">
-        <li class="characteric-index_item">
+        {charactericProduct.map((charactericItem)=>  <> <li class="characteric-index_item">
             <ul class="characteric-index_itemlist">
                 <li class="characteric-index_listitem">
                     <ul class="characteric-indeximg">
+                   
                         <li class="characteric-img">
-                            <img src={indeximg} alt="" class="index_img"/>
+                            <img src={charactericItem.imageIndex} alt="" class="index_img"/>
                         </li>
+                    
                     </ul>
                 </li>
                 <li class="characteric-index_listitem">
                     <ul class="characteric-imges">
+                    {charactericItem.images.map((item)=>
                         <li class="characteric-index_imges">
-                            <img src="/img/imges1 (1).svg" alt="" class="index_img"/>
-                        </li>
-                        <li class="characteric-index_imges">
-                            <img src="/img/imges1 (2).svg" alt="" class="index_img"/>
-                        </li>
-                        <li class="characteric-index_imges">
-                            <img src="/img/imges1 (3).svg" alt="" class="index_img"/>
-                        </li>
-                        <li class="characteric-index_imges">
-                            <img src="/img/imges1 (4).svg" alt="" class="index_img"/>
-                        </li>
+                        <img src={item} alt="" class="index_img"/>
+                    </li> )}
                     </ul>
                 </li>
             </ul>
@@ -40,25 +58,25 @@ export default function Characteric() {
         <li class="characteric-index_item">
              <ul class="characteric-firstrow">
                 <li class="characteric_firstrow-item">
-                    <span class="characteric-productID">JA182765</span>
+                    <span class="characteric-productID">{charactericItem.productId}</span>
                 </li>
                 <li class="characteric_firstrow-item">
-                    <span class="characteric-star_empty"></span>
-                    <span class="characteric-star_empty"></span>
-                    <span class="characteric-star_empty"></span>
-                    <span class="characteric-star"></span>
-                    <span class="characteric-star"></span>
+                {rating.map((ratingItem)=> (  <span
+          key={ratingItem}
+          className={ratingItem <= charactericItem.rating  ? "characteric-star_empty" : "characteric-star"}
+        />))}
                 </li>
                 <li class="characteric_firstrow-item">
-                    <a href="reviews">
-                        <span class="review-count">(12) Отзывов</span>
-                    </a>                            
+                    <NavLink onClick={scrollToReviews} to= "">
+                        <span class="review-count">({reviewsCount}) Отзывов</span>
+                        </NavLink>
+                                          
                 </li>
              </ul>
 
              <ul class="characteric-secondtrow">
                 <li class="characteric-secondstrow_item">
-                    <h2 class="characteric-secondstrow_header" >Дверной Замок Golden Soft для офиса</h2>
+                    <h2 class="characteric-secondstrow_header" > {charactericItem.title}</h2>
                 </li>
              </ul>
 
@@ -104,14 +122,13 @@ export default function Characteric() {
                     <span class="characteric-fourdrow_text">Цвет</span>
                 </li>
                 <ul class="color_list">
-                   
-                    <li class="color-list_item">
-                        <img src="/icon/Icon color.svg" alt=""/>
-                    </li>
-                    <li class="color-list_item1">
-
-                    </li>
-                    <li class="color-list_item2"/>
+                   {charactericItem.colors.map((coloritem)=>
+                   <>  
+                   {/* <li class="color-list_item"/>
+                    <li class="color-list_item1"/>
+                    <li class="color-list_item2"/> */}
+                    </>)}
+                  
 
                     </ul>
                 </div>
@@ -119,8 +136,8 @@ export default function Characteric() {
              </ul>
             
              <div class="price_charackter">
-                <span class="current-price">33 000₽</span>
-                <span class="old-price">37 000₽</span>
+                <span class="current-price">{charactericItem.newPrice}</span>
+                <span class="old-price">    {charactericItem.oldPrice}</span>
             </div>
               <div class="like_row">
 
@@ -157,10 +174,11 @@ export default function Characteric() {
             <p class="accordeon_text"> Доставка занимает от 2 до 5 рабочих дней, в зависимости от региона.</p>
         </details>
     </div>
-        </li>
+        </li> </>)}
+       
     </ul>
 </section>
-<Tabulate/>
+<Tabulate ref={reviewsRef}/>
 </>
   );
 }

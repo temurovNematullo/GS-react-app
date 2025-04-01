@@ -16,7 +16,7 @@ import { useHorizontalScroll } from '../../assets/customHooks/useHorizontalScrol
   useEffect(()=>{
     dispatch(getRecentlyViewed())
   }, [])
-console.log("Я тоже далбаеб",recentlyViewed)
+
     return(
         <section class="productcard">
         <h2 class="productcar_header">Вы недавно просмотрели
@@ -41,8 +41,8 @@ console.log("Я тоже далбаеб",recentlyViewed)
                            <span>Подарок</span>
                        </div>: ""}
                     
-                       <NavLink to={`/Каталог/${cardInfo.id}`} className="product-card__image">
-                           <img src={cardInfo.image} alt="Вариативный замок Golden Soft для отеля." />
+                       <NavLink to={`/Каталог/${cardInfo.productId}`} className="product-card__image">
+                           <img src={cardInfo.imageIndex} alt="Вариативный замок Golden Soft для отеля." />
                        </NavLink>
 
                        <div className="product-card__info">

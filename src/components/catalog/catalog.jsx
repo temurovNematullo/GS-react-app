@@ -153,7 +153,7 @@ console.log(cards)
                     </div>
 
                     <ul id="catalogContainer" className="catalog-list">
-                       {status === "loading" ? <Preloader/> : cards.map((cardInfo) => ( <li key={cardInfo.id} className="product-card">
+                       {status === "loading" ? <Preloader/> : cards.map((cardInfo) => ( <li key={cardInfo.productId} className="product-card">
                        
                             <div className="product-card__labels">
                             {cardInfo.status ? <> <img src={have} alt="В наличии" />
@@ -167,8 +167,8 @@ console.log(cards)
                                 <span>Подарок</span>
                             </div>: ""}
                          
-                            <NavLink to={`/Каталог/${cardInfo.id}`} onClick={() => handleClick(cardInfo)} className="product-card__image">
-                                <img src={cardInfo.image} alt="Вариативный замок Golden Soft для отеля." />
+                            <NavLink to={`/Каталог/${cardInfo.productId}`} onClick={() => handleClick(cardInfo)} className="product-card__image">
+                                <img src={cardInfo.imageIndex} alt="Вариативный замок Golden Soft для отеля." />
                             </NavLink>
 
                             <div className="product-card__info">

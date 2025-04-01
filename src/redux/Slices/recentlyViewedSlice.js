@@ -18,11 +18,16 @@ const recentlyViewedSlice = createSlice({
 export const putRecentlyCards = createAsyncThunk(
   "recentlyViewed/putRecentlyCards",
   async (recentlyCard, { getState, dispatch }) => {
-    console.log(" putRecentlyCards вызван! Данные:", recentlyCard);
+    const { recentlyViewed } = getState().recentlyViewedReducer;
 
     try {
-      const response = await catalogAPI.putCards(recentlyCard);
-      console.log(" Ответ от сервера:", response);
+      const isAlreadyViwed = recentlyViewed.some(
+        (item) => item.productId === recentlyCard.productId
+      );
+      if (!isAlreadyViwed) {
+        const response = await catalogAPI.putCards(recentlyCard);
+        console.log(" Ответ от сервера:", response);
+      }
     } catch (error) {
       console.error(" Ошибка при отправке:", error);
       throw error;
