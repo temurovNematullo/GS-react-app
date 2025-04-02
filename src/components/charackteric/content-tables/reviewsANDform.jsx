@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { fetchReviews, postReviews, setLimit } from "../../../redux/Slices/reviewsSlice"
 import { useParams } from "react-router"
-
+import Preloader from "../../../assets/preloader/Preloader"
 
 export default function ReviewsAndForm(){
     const dispatch = useDispatch()
@@ -49,7 +49,7 @@ setSelectedStars(0)
 <div className="tables-content tables--reviews active">
 <div class="tables-content tables--reviews" >
     <div class="reviewsConteiner">
-    <div class="reviews--container" id="reviews-container">
+        {reviews != 0 ? <><div class="reviews--container" id="reviews-container">
         {reviews.map((item)=> (
              <div class="tables--reviews__list">
              <div class="reviews--head">
@@ -77,15 +77,16 @@ setSelectedStars(0)
                  </div>
              </div>
          </div>
-         ))}
-   
-          
+         ))}  
     </div>
-  
     <div onClick={()=> dispatch(setLimit())} class="reviews--feedback__button" id="toggle-reviews-btn">
         <img src={refresh} alt="Обновить"/>
         <span>Показать еще</span>
     </div>
+    </>
+    : <Preloader/>}
+    
+  
 </div>
 </div> 
 

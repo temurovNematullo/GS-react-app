@@ -1,0 +1,42 @@
+.banner {
+    width: auto;
+    background-color: var(--backgraund-color);
+  }
+  
+  .banner_info {
+    max-width: 1200px; /* Ограничиваем ширину на больших экранах */
+    padding-inline: 320px; /* Отступы по бокам */
+    padding-block: 40px;
+    margin: 0 auto; /* Центрируем */
+  }
+  
+  .banner_info_list {
+    display: flex;
+    flex-direction: row; /* По умолчанию в одну колонку */
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+   column-gap: 40px; /* Отступы между элементами */
+  }
+  
+  .banner_info_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: black;
+    font-family: var(--font-family-base);
+  }
+  
+  .banner_info_number {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .banner_info_text {
+    display: block;
+    font-size: 14px;
+    margin-top: 16px;
+    color: var(--color-lightgray);
+  }

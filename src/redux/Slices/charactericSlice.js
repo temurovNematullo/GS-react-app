@@ -12,6 +12,19 @@ const charactericSlice = createSlice({
     setCharactericProduct: (state, action) => {
       state.charactericProduct = action.payload;
     },
+    setNewIndexImg(state, action) {
+      const { newImg } = action.payload;
+
+      const product = state.charactericProduct[0];
+      const oldImg = product.imageIndex;
+
+      product.imageIndex = newImg;
+      const index = product.images.findIndex((img) => img === newImg);
+
+      if (index !== -1) {
+        product.images[index] = oldImg;
+      }
+    },
   },
 });
 
@@ -31,6 +44,7 @@ export const fetchCharactericProduct = createAsyncThunk(
   }
 );
 
-export const { setCharactericProduct } = charactericSlice.actions;
+export const { setCharactericProduct, setNewIndexImg } =
+  charactericSlice.actions;
 
 export default charactericSlice.reducer;

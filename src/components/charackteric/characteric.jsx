@@ -2,27 +2,37 @@ import "../../scss/style.css";
 import like from "../../assets/icon/Corz.svg";
 import Tabulate from "./content-tables/content-table-pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
-import { fetchCharactericProduct } from "../../redux/Slices/charactericSlice";
+import { useEffect, useRef, useState } from "react";
+import { fetchCharactericProduct, setNewIndexImg } from "../../redux/Slices/charactericSlice";
 import { NavLink, useParams } from "react-router";
 
 export default function Characteric() {
     const productId = useParams()
     const reviewsRef = useRef()
     const dispatch = useDispatch()
+
 const {charactericProduct} = useSelector((state)=> state.charactericReducer)
 console.log("charactericProduct",charactericProduct)
 const rating = [1,2,3,4,5]
-const {reviews, page} = useSelector((state)=> state.reviewsReducer)
-
+const {reviews} = useSelector((state)=> state.reviewsReducer)
 const reviewsCount = reviews?.length || 0;
 
+const totalRating = reviews.map((item)=> item.rating).reduce((acc, num) => acc + num, 0)
+const averageRating = Math.ceil(totalRating / reviewsCount)
 
 const scrollToReviews = ()=>{
     if(reviewsRef.current){
         reviewsRef.current.scrollIntoView({behavior: "smooth", block: "start"})
     }
 }
+
+const hadlClick = (newImg) => {
+  
+ console.log("Произошло нажатие ")
+    if (charactericProduct.length !== 0) {
+      dispatch(setNewIndexImg({ newImg }));
+    }
+  };
 
 useEffect(()=>{
     
@@ -48,7 +58,7 @@ useEffect(()=>{
                 <li class="characteric-index_listitem">
                     <ul class="characteric-imges">
                     {charactericItem.images.map((item)=>
-                        <li class="characteric-index_imges">
+                        <li onClick={()=>hadlClick(item)}  class="characteric-index_imges">
                         <img src={item} alt="" class="index_img"/>
                     </li> )}
                     </ul>
@@ -63,7 +73,7 @@ useEffect(()=>{
                 <li class="characteric_firstrow-item">
                 {rating.map((ratingItem)=> (  <span
           key={ratingItem}
-          className={ratingItem <= charactericItem.rating  ? "characteric-star_empty" : "characteric-star"}
+          className={ratingItem <= averageRating  ? "characteric-star_empty" : "characteric-star"}
         />))}
                 </li>
                 <li class="characteric_firstrow-item">
@@ -124,9 +134,7 @@ useEffect(()=>{
                 <ul class="color_list">
                    {charactericItem.colors.map((coloritem)=>
                    <>  
-                   {/* <li class="color-list_item"/>
-                    <li class="color-list_item1"/>
-                    <li class="color-list_item2"/> */}
+                   <li key = {coloritem.id} class="color-list_item" style={{backgroundColor: coloritem.hex}}/>
                     </>)}
                   
 
@@ -178,7 +186,7 @@ useEffect(()=>{
        
     </ul>
 </section>
-<Tabulate ref={reviewsRef}/>
+<Tabulate  ref={reviewsRef}/>
 </>
   );
 }
