@@ -6,6 +6,7 @@ import Right from '../../assets/icon/Right.svg';
 import Preloader from '../../assets/preloader/Preloader';
 import { fetchMainProducts, setMainProductId } from '../../redux/Slices/mainPageProductSlice';
 
+
 export default function Mainsection() {
 
 const {mainProducts, id} = useSelector((state)=> state.mainPageProductReducer)

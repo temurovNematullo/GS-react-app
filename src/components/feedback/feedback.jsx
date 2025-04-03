@@ -1,14 +1,19 @@
 import { useForm } from "react-hook-form"
 import '../../scss/style.css';
+import { useDispatch } from "react-redux";
+import { postfeedback } from "../../redux/Slices/mainPageProductSlice";
+import { formatDate } from "../../assets/customHooks/useCurrentDate";
+
 
 export default function Feedback (){
-
+const dispatch = useDispatch()
     const {register, handleSubmit, reset,
             formState:{errors}
         } = useForm({mode: 'onChange'})
 
     const onSubmit = (data) => {
-        console.log(data)
+        dispatch(postfeedback({...data, date: formatDate()}))
+        reset()
     }
 
     return(

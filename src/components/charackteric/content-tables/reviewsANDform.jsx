@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { fetchReviews, postReviews, setLimit } from "../../../redux/Slices/reviewsSlice"
 import { useParams } from "react-router"
 import Preloader from "../../../assets/preloader/Preloader"
+import { formatDate } from "../../../assets/customHooks/useCurrentDate"
 
 export default function ReviewsAndForm(){
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const [selectedStars, setSelectedStars] = useState()
 
 useEffect(()=>{
     dispatch(fetchReviews(productId.id))
-},[page, reviewsCount])
+},[page, reviewsCount, productId])
 
 const{
     register,
@@ -28,11 +29,6 @@ const{
 
 const handleClick = (ratingItem) => {
     setSelectedStars(ratingItem);
-  };
-
-const formatDate = () => {
-    const options = { day: "numeric", month: "long", year: "numeric" };
-    return new Date().toLocaleDateString("ru-RU", options);
   };
 
 

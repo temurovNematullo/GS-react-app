@@ -11,6 +11,8 @@ export default function Characteric() {
     const reviewsRef = useRef()
     const dispatch = useDispatch()
 
+const [selectImg, setSelectImg] = useState()
+
 const {charactericProduct} = useSelector((state)=> state.charactericReducer)
 console.log("charactericProduct",charactericProduct)
 const rating = [1,2,3,4,5]
@@ -19,6 +21,7 @@ const reviewsCount = reviews?.length || 0;
 
 const totalRating = reviews.map((item)=> item.rating).reduce((acc, num) => acc + num, 0)
 const averageRating = Math.ceil(totalRating / reviewsCount)
+
 
 const scrollToReviews = ()=>{
     if(reviewsRef.current){
@@ -30,6 +33,7 @@ const hadlClick = (newImg) => {
   
  console.log("Произошло нажатие ")
     if (charactericProduct.length !== 0) {
+        setSelectImg(newImg)
       dispatch(setNewIndexImg({ newImg }));
     }
   };
@@ -38,7 +42,7 @@ useEffect(()=>{
     
     dispatch(fetchCharactericProduct(productId))
    
-},[])
+},[productId])
 
   return (
     <>
@@ -58,8 +62,9 @@ useEffect(()=>{
                 <li class="characteric-index_listitem">
                     <ul class="characteric-imges">
                     {charactericItem.images.map((item)=>
-                        <li onClick={()=>hadlClick(item)}  class="characteric-index_imges">
-                        <img src={item} alt="" class="index_img"/>
+                        <li onClick={()=>hadlClick(item)}  classname="characteric-index_imges">
+                        <img src={item} alt=""  className={item === selectImg ? "item_img_active" : "item_img"}/>
+                        
                     </li> )}
                     </ul>
                 </li>

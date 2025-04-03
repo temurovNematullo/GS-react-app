@@ -10,6 +10,9 @@ const instance2 = axios.create({
 const instance3 = axios.create({
   baseURL: "https://67e53b7418194932a5852bae.mockapi.io/",
 });
+const instance4 = axios.create({
+  baseURL: "https://67ee6253c11d5ff4bf79633a.mockapi.io/",
+});
 export const mainsectionAPI = {
   getLocks() {
     return instance.get("locks").then((response) => response.data);
@@ -26,6 +29,9 @@ export const mainsectionAPI = {
   },
   getPopularProduct() {
     return instance2.get("productcards").then((response) => response.data);
+  },
+  postFeedback(feedbackData) {
+    return instance4.post("feedbackUsers", feedbackData);
   },
 };
 

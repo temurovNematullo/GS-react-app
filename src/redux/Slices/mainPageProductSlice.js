@@ -32,6 +32,18 @@ export const fetchMainProducts = createAsyncThunk(
   }
 );
 
+export const postfeedback = createAsyncThunk(
+  "mainpage/feedback",
+  async (feedbackData, { getState, dispatch }) => {
+    try {
+      const data = await mainsectionAPI.postFeedback(feedbackData);
+      alert("Данные успешно отправлены ждите ответа )", data);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
+);
+
 export const { setMainProductId, setMainProduct } =
   mainPAgeProductSlice.actions;
 

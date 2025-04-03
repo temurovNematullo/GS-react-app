@@ -19,11 +19,11 @@ const charactericSlice = createSlice({
       const oldImg = product.imageIndex;
 
       product.imageIndex = newImg;
-      const index = product.images.findIndex((img) => img === newImg);
+      // const index = product.images.findIndex((img) => img === newImg);
 
-      if (index !== -1) {
-        product.images[index] = oldImg;
-      }
+      // if (index !== -1) {
+      //   product.images[index] = oldImg;
+      // }
     },
   },
 });

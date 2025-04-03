@@ -1,0 +1,335 @@
+.catalog__List{
+    padding-top: 90px; 
+    padding-right: 100px;   
+  }
+  .catalog_header h2{
+    font-size: 28px;
+    font-weight: 600;
+    padding-left: 100px;
+  }
+  .reset_filters {
+    display: flex;
+    padding-left: 100px;
+    padding-bottom: 32px;
+  }
+  
+  .reset_filters > *:nth-child(2) {
+    padding-left: 30px; /* Отступ между первым и вторым элементом */
+  }
+  
+  .reset_filters > *:last-child {
+    margin-left: auto; /* Последний элемент уходит в конец */
+  }
+  
+  
+  .reset_filters__button{
+    width: 290px;
+    height: 40px;
+    border: solid 1px var(--color-button-hover);
+    background-color: white;
+  }
+  .have_filters{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    column-gap: 10px;
+    }
+    .have_filters img{
+    width: 14px;
+    height: 14px;
+      }
+      .filter_product{
+        display: flex;
+        font-size: 14px;
+        width: 195px;
+        height: 40px;
+        border: none;
+        border: solid 2px var(--color-base);
+      }
+
+      .conteiner_filter{
+        display: flex;
+        column-gap: 100px;
+        padding-left: 100px;
+      }
+      .filter_accordeonConteiner{
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+        min-width: 290px;
+        height: 100%;
+        padding: 24px;
+        border: solid 2px var(--color-base);
+      }
+      
+      .filter_accordeonConteiner__header{
+        font-size: 22px;
+        font-weight: bold;
+      }
+      .accordeonfilter{
+        padding-bottom: 20px;
+        border-bottom: solid 2px var(--color-base);
+      }
+      .accordionheader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.inputs input {
+    width: 100px;
+    text-align: center;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .inputs input {
+    width: 113px;
+    height: 45px;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid var(--color-base);
+  }
+  
+  .inputs input:focus{
+    border-color: var(--color-button-hover);
+  }
+  .slider_container {
+    position: relative;
+    width: 100%;
+    height: 30px;
+  }
+  
+  
+  
+  .slider_container input[type="range"] {
+    position: absolute;
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+  }
+  
+  .slider_container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background:white;
+    cursor: pointer;
+    pointer-events: auto;
+    border-radius: 8%;
+    border: solid 2px var(--color-button-hover);
+    transform: translateY(-2px);
+  
+  }
+  
+  /* Двигаем ЛЕВЫЙ ползунок влево */
+  #minRange::-webkit-slider-thumb {
+    position: relative;
+    left: -3px; 
+  }
+  
+  .slider_container .slider-track {
+    position: absolute;
+    height: 5px;
+    background: var(--color-button-hover);
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-radius: 10%;
+    transform: translateY(-50%);
+    z-index: -1; /* Этот элемент будет выше */
+    margin-top: 10px;
+  }
+  
+  .slider_container::before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: var(--color-base); /* Серый фон */
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    z-index: -2; /* Этот элемент будет ниже */
+    margin-top: 10px;
+  }
+  
+.features {
+    padding: 0;
+    margin: 0;
+  }
+  .feature_label {
+    display: flex;
+    align-items: start;
+    cursor: pointer;
+    width: 100%;
+    flex-wrap: nowrap; /* Запрещаем перенос на новую строку */
+  }
+  /* Скрываем стандартный чекбокс */
+.feature_label input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Стилизация кастомного чекбокса */
+  .feature_label .custom-checkbox {
+    position: relative;
+    width: 16px; /* Размер кастомного чекбокса */
+    height: 16px; /* Размер кастомного чекбокса */
+    border: 2px solid var(--color-base); /* Цвет рамки */
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    flex-shrink: 0; /* Запрещаем сжатие чекбокса */
+  }
+  
+  /* Стили для чекбокса при активном состоянии */
+  .feature_label input[type="checkbox"]:checked + .custom-checkbox {
+    background-color: var(--color-button); /* Цвет фона при активном состоянии */
+    border-color: var(--color-button); /* Цвет границы при активном состоянии */
+    background-image: url(../../assets/icon/galochka.svg);
+    background-size: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .feature_text {
+    font-size: 14px;
+    font-weight: 400;
+    flex-grow: 1; /* Текст занимает всё доступное пространство */
+    margin-right: 10px; /* Отступ между текстом и счетчиком */
+    white-space: normal; /* Запрещаем перенос текста на новую строку */
+  }
+  .feature_count {
+    font-size: 12px;
+    font-weight: 200;
+    color: var(--color-lightgray);
+    margin-left: auto; /* Прижимаем счетчик к правому краю */
+    white-space: nowrap; /* Запрещаем перенос счетчика на новую строку */
+  }
+  .catalog_list {
+    display: grid;
+    grid-template-columns: repeat(3, 290px); /* 3 столбца по 290px */
+    row-gap: 30px;
+    column-gap: 30px;
+    padding: 0;
+    justify-content: end;
+    margin-bottom: 160px; 
+  }
+/* Верхние метки */
+.product_card__labels {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    display: flex;
+    column-gap: 8px;
+  }
+  .product_card__status {
+    color: var(--color-lightgray);
+    padding: 5px 8px;
+    font-size: 14px;
+  }
+  
+.product_card__sale {
+    background: rgb(255, 255, 255);
+    color: var(--color-lightgray);
+    width: 51px;
+    height: 30px;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: absolute;
+    top: 5px;
+    left: 210px;
+  }
+  /* Иконка подарка */
+.product_card__gift {
+    position: absolute;
+    top: 40px;
+    left: 12px;
+    background: white;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }    
+  /* Изображение товара */
+.product_card__image {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .product_card__image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  /* Информация о товаре */
+.product_card__info {
+    width: 288px;
+    height: 106px;
+    border-bottom: solid 2px var(--color-base);
+    border-left: solid 2px var(--color-base);
+    border-right: solid 2px var(--color-base);
+    padding-left: 12px;
+    padding-top: 10px;
+  }
+  
+.product_card__title {
+    font-size: 16px;
+    color: var(--color-lightgray);
+    padding-bottom: 10px;
+  }
+  /* Цена */
+.product_card__price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .product_card__new_price {
+    font-size: 20px;
+   font-weight: 600;
+    color: black;
+  }
+  
+  .product_card__old_price {
+    font-size: 16px;
+    color: var(--color-lightgray);
+    text-decoration: line-through;
+  }
+  .catalog_pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Отступ между кнопками */
+    margin-top: 30px; /* Отступ сверху */
+    margin: 0 auto; /* Центрируем */
+  }
+  .pagination_dots {
+    padding: 8px 10px;
+    font-size: 16px;
+    color: black;
+  }
+  .product_card {
+    position: relative;
+    flex: 0 0 auto; 
+    width: 290px;
+    height: 320px;
+    text-align: start;
+    margin-bottom: 100px;
+  }
