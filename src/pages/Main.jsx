@@ -14,7 +14,8 @@ function Main() {
             <Banner />
             <WhyGS />
             <Categories />
-            <Popular_products /> 
+            <Popular_products />
+             
         </>
     );
 }
