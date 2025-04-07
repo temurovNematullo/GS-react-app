@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/GS-react-app/static/css/main.661282ac.css",
-    "main.js": "/GS-react-app/static/js/main.09c26527.js",
+    "main.css": "/GS-react-app/static/css/main.de56758f.css",
+    "main.js": "/GS-react-app/static/js/main.49225cad.js",
     "static/js/453.0874e7c3.chunk.js": "/GS-react-app/static/js/453.0874e7c3.chunk.js",
     "static/media/description.svg": "/GS-react-app/static/media/description.f6319ffb4d988eae4f413d4f9272a70a.svg",
     "static/media/фото.svg": "/GS-react-app/static/media/фото.f629da2c5f4ecf7e69e5.svg",
@@ -24,19 +24,18 @@
     "index.html": "/GS-react-app/index.html",
     "static/media/Corz.svg": "/GS-react-app/static/media/Corz.dd8a9806da365c6f142dfd50098b2eb3.svg",
     "static/media/checked.svg": "/GS-react-app/static/media/checked.f391c404700180eb2106.svg",
-    "static/media/cancel.svg": "/GS-react-app/static/media/cancel.81dbd4ba16e55d60b093f96bf0053270.svg",
     "static/media/donthave.svg": "/GS-react-app/static/media/donthave.5c3247137f372cc5eadd7de1f96ac154.svg",
     "static/media/scrolRight.svg": "/GS-react-app/static/media/scrolRight.c5b9e8081c0672a9bd75.svg",
     "static/media/Right.svg": "/GS-react-app/static/media/Right.7f73b842ef5c5ba308d5421d0670e90d.svg",
     "static/media/have.svg": "/GS-react-app/static/media/have.e491c04a3d04d595adde0e7a01acc365.svg",
     "static/media/Left.svg": "/GS-react-app/static/media/Left.73c2a3bceb4f966646af059ec2b348e7.svg",
     "static/media/galochka.svg": "/GS-react-app/static/media/galochka.2d5f4fc66bbd557407df.svg",
-    "main.661282ac.css.map": "/GS-react-app/static/css/main.661282ac.css.map",
-    "main.09c26527.js.map": "/GS-react-app/static/js/main.09c26527.js.map",
+    "main.de56758f.css.map": "/GS-react-app/static/css/main.de56758f.css.map",
+    "main.49225cad.js.map": "/GS-react-app/static/js/main.49225cad.js.map",
     "453.0874e7c3.chunk.js.map": "/GS-react-app/static/js/453.0874e7c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.661282ac.css",
-    "static/js/main.09c26527.js"
+    "static/css/main.de56758f.css",
+    "static/js/main.49225cad.js"
   ]
 }
