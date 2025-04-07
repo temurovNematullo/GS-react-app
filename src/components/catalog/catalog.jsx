@@ -8,13 +8,15 @@ import donthave from '../../assets/img/donthave.svg'
 import podarok from '../../assets/img/podaroc.svg'
 import { putRecentlyCards} from "../../redux/Slices/recentlyViewedSlice";
 import style from"./catalog.module.css"
-import cancel from "../../assets/icon/cancel.svg"
+import { debounce } from "lodash";
 
 const Catalog = () => {
 const dispatch = useDispatch()
 const [selectedValue, setSelectedValue]= useState()
-const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
+const [searchValue, setSearchValue] = useState("")
 
+const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
+const [newFilteredData, setNewFilteredData] = useState()
 const changePage =(newPage)=>{   
         dispatch(setCurrentPage(newPage));   
 }
@@ -39,11 +41,21 @@ const handleClick =(cardInfo)=>{
     console.log("Клик по товару:", cardInfo);
     dispatch(putRecentlyCards(cardInfo))
 }
-//
+
+const handSearchForId =  debounce((term)=>{
+    setSearchValue(term)
+    const filteredData = cards.filter((item) => item.productId === term);
+    setNewFilteredData (filteredData);
+}, 1000)
+
+console.log("searchValue", searchValue)
+console.log("newFilteredData", newFilteredData)
+
 useEffect(()=>{
 dispatch(fetchCatalogData())
 },[page, sortBy, order, dispatch])
-console.log(cards)
+
+const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredData : cards
     return (
         <>
         <section className="catalog-section" id="catalog-section">
@@ -53,14 +65,14 @@ console.log(cards)
                 </div>
                 <div className={style.reset_filters}>
                     <button className={style.reset_filters__button} onClick={handlClickResetFilters}>Сбросить фильтры</button>
-                    {/* <span className={style.have_filters}>
-                        Электронные кодовые замки <img src={cancel} alt="" loading="lazy" />
-                    </span> */}
+                    <span className={style.have_filters}>
+                        <input  type="text" onChange={(e)=> handSearchForId(e.target.value)} id="searchForId" placeholder='Поиск по Id ...' />
+                    </span>
                     <select  value={selectedValue} name="" id="" className={style.filter_product} onChange={(event)=>changeFilter(event.target.value)}>
                         <option value="filter--list" hidden>Выбрать фильтр</option>
                         <option value="product--haveFilter">В наличии</option>
-                        <option value="min--priceFilter">По убыванию цен</option>
-                        <option value="max--priceFilter">По возрастанию цен</option>
+                        <option value="min--priceFilter">По  возрастанию цен</option>
+                        <option value="max--priceFilter">По убыванию цен</option>
                     </select>
                 </div>
 
@@ -159,7 +171,7 @@ console.log(cards)
                     </div>
 
                     <ul id="catalogContainer" className={style.catalog_list}>
-                       {status === "loading" ? <Preloader/> : cards.map((cardInfo) => ( <li key={cardInfo.productId} className={style.product_card}>
+                       {status === "loading" ? <Preloader/> : renderData.map((cardInfo) => ( <li key={cardInfo.productId} className={style.product_card}>
                        
                             <div className={style.product_card__labels}>
                             {cardInfo.status ? <> <img src={have} alt="В наличии" />
