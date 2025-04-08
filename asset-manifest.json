@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/GS-react-app/static/css/main.317083f1.css",
-    "main.js": "/GS-react-app/static/js/main.613f9fce.js",
+    "main.js": "/GS-react-app/static/js/main.008e393b.js",
     "static/js/453.0874e7c3.chunk.js": "/GS-react-app/static/js/453.0874e7c3.chunk.js",
     "static/media/description.svg": "/GS-react-app/static/media/description.f6319ffb4d988eae4f413d4f9272a70a.svg",
     "static/media/фото.svg": "/GS-react-app/static/media/фото.f629da2c5f4ecf7e69e5.svg",
@@ -31,11 +31,11 @@
     "static/media/Left.svg": "/GS-react-app/static/media/Left.73c2a3bceb4f966646af059ec2b348e7.svg",
     "static/media/galochka.svg": "/GS-react-app/static/media/galochka.2d5f4fc66bbd557407df.svg",
     "main.317083f1.css.map": "/GS-react-app/static/css/main.317083f1.css.map",
-    "main.613f9fce.js.map": "/GS-react-app/static/js/main.613f9fce.js.map",
+    "main.008e393b.js.map": "/GS-react-app/static/js/main.008e393b.js.map",
     "453.0874e7c3.chunk.js.map": "/GS-react-app/static/js/453.0874e7c3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.317083f1.css",
-    "static/js/main.613f9fce.js"
+    "static/js/main.008e393b.js"
   ]
 }
