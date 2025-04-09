@@ -36,7 +36,7 @@ export const mainsectionAPI = {
 };
 
 export const catalogAPI = {
-  getCatalogCards(page, limit, sortBy, order) {
+  getCatalogCards(page, limit, sortBy, order, title) {
     return instance2
       .get("catalogProductCards", {
         params: {
@@ -44,6 +44,7 @@ export const catalogAPI = {
           limit: limit,
           sortBy: sortBy,
           order: order,
+          title: title,
         },
       })
       .then((response) => response.data);

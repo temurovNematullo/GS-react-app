@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
 import { fetchCatalogData , setCurrentPage, setParams} from '../../redux/Slices/catalogCardsSlice';
@@ -9,16 +9,20 @@ import podarok from '../../assets/img/podaroc.svg'
 import { putRecentlyCards} from "../../redux/Slices/recentlyViewedSlice";
 import style from"./catalog.module.css"
 import { debounce } from "lodash";
-
+import { useLayoutEffect } from "react";
 const Catalog = () => {
 const dispatch = useDispatch()
+const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
+const listRef = useRef()
+
 const [selectedValue, setSelectedValue]= useState()
 const [searchValue, setSearchValue] = useState("")
+const [minPrice, setMinPrice] = useState()
+const [maxPrice, setMaxPrice] = useState()
+const [title, setTitle]=useState()
 
-const {cards, status, page, totalPage, sortBy, order, hasMore} = useSelector(state=> state.catalogCards)
-const [newFilteredData, setNewFilteredData] = useState()
 const changePage =(newPage)=>{   
-        dispatch(setCurrentPage(newPage));   
+        dispatch(setCurrentPage(newPage));       
 }
 
 const changeFilter = (value)=>{
@@ -34,6 +38,7 @@ const changeFilter = (value)=>{
 
 const handlClickResetFilters = ()=>{
     dispatch(setParams({sortBy: " ", order: " "}))
+    setTitle("")
     setSelectedValue("filter--list")
 }
 
@@ -44,22 +49,42 @@ const handleClick =(cardInfo)=>{
 
 const handSearchForId =  debounce((term)=>{
     setSearchValue(term)
-    const filteredData = cards.filter((item) => item.productId === term);
-    setNewFilteredData (filteredData);
 }, 1000)
 
-console.log("searchValue", searchValue)
-console.log("newFilteredData", newFilteredData)
+
+useLayoutEffect(() => {
+    if (status === "success") {
+      requestAnimationFrame(() => {
+        listRef.current?.scrollIntoView();
+      });
+    }
+  }, [status]);
 
 useEffect(()=>{
-dispatch(fetchCatalogData())
-},[page, sortBy, order, dispatch])
+dispatch(fetchCatalogData(title))
+},[page, sortBy, order, dispatch, title])
 
-const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredData : cards
+const renderData = useMemo(()=>{
+    let data = cards
+    if(searchValue){
+     data = data.filter((item)=> item.productId === searchValue)
+    }
+    if(minPrice || maxPrice){
+      data =  data.filter((item)=>{
+            if(minPrice && item.newPrice < minPrice) return false
+            if(maxPrice && item.newPrice > maxPrice) return false
+            return true
+        })
+    }
+    return data
+}, [cards,searchValue, minPrice, maxPrice])
+
+console.log(renderData)
+
     return (
         <>
         <section className="catalog-section" id="catalog-section">
-            <div className={style.catalog__List}>
+            <div ref={listRef} className={style.catalog__List}>
                 <div className={style.catalog_header}>
                     <h2>Накладные электронные замки</h2>
                 </div>
@@ -68,6 +93,12 @@ const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredDa
                     <span className={style.have_filters}>
                         <input  type="text" onChange={(e)=> handSearchForId(e.target.value)} id="searchForId" placeholder='Поиск по Id ...' />
                     </span>
+                    <span className={style.have_filters}>
+                        <input  type="text" onChange={(e)=> setTitle(e.target.value)} id="searchForTitle" placeholder='Поиск по названию ...' />
+                    </span>
+                     <button disabled={ page === 1 } onClick={() => { if (page > 1) changePage(page - 1); }}>Prev</button> 
+
+                <button disabled={!hasMore} onClick={() => changePage(page + 1)}>Next</button>
                     <select  value={selectedValue} name="" id="" className={style.filter_product} onChange={(event)=>changeFilter(event.target.value)}>
                         <option value="filter--list" hidden>Выбрать фильтр</option>
                         <option value="product--haveFilter">В наличии</option>
@@ -86,14 +117,11 @@ const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredDa
                             </summary>
                             <div className={style.accordion}>
                                 <div className={style.inputs}>
-                                    <input type="number" id="minPrice" value="1000" />
-                                    <input type="number" id="maxPrice" value="24500" />
+                                    <input type="number" id="minPrice" value={minPrice}  onChange={(e)=> setMinPrice(Number(e.target.value))} />
+                                    <input type="number" id="maxPrice" value={maxPrice}  onChange={(e)=> setMaxPrice(Number(e.target.value))} />
+                                    
                                 </div>
-                                <div className={style.slider_container}>
-                                    <input type="range" id="minRange" min="0" max="100000" value="10000" />
-                                    <input type="range" id="maxRange" min="0" max="100000" value="24500" />
-                                    <div className={style.slider_track}></div>
-                                </div>
+                            
                             </div>
                         </details>
 
@@ -132,42 +160,6 @@ const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredDa
                                 </ul>
                             </div>
                         </details>
-{/* 
-                        <details className="accordeonfilter">
-                            <summary className="accordion-header">
-                                <label>Материал</label>
-                            </summary>
-                            <div className="accordion">
-                                <ul className="features">
-                                    <li className="feature-item">
-                                        <label className="feature-label">
-                                            <input type="checkbox" />
-                                            <span className="custom-checkbox"></span>
-                                            <span className="feature-text">Сталь</span>
-                                            <span className="feature-count">(65)</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </details>
-
-                        <details className="accordeonfilter">
-                            <summary className="accordion-header">
-                                <label>Размеры</label>
-                            </summary>
-                            <div className="accordion">
-                                <ul className="features">
-                                    <li className="feature-item">
-                                        <label className="feature-label">
-                                            <input type="checkbox" />
-                                            <span className="custom-checkbox"></span>
-                                            <span className="feature-text">300Х100 мм</span>
-                                            <span className="feature-count">(65)</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </details> */}
                     </div>
 
                     <ul id="catalogContainer" className={style.catalog_list}>
@@ -199,10 +191,11 @@ const renderData = newFilteredData && newFilteredData.length > 0 ? newFilteredDa
                         </li>  ))}
                     </ul>
                 </div>
-                <div className={style.catalog_pagination}>
+               
+                {/* <div className={style.catalog_pagination}>
                     <span className={style.pagination_dots}></span>
-                    <button disabled = {hasMore} onClick={() => changePage(page - 1)}>Prev</button> <button disabled = {!hasMore} onClick={() => changePage(page + 1)}>NExt</button>
-                </div>
+                   
+                </div> */}
             </div>
         </section>
         </>

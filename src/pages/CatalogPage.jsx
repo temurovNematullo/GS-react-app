@@ -11,7 +11,7 @@ const CatalogPage = () => {
     return (
       <>
       <Catalog />
-      <FormData/>
+     
 
       <RecentlyVeiwed/>
       <InfoProduct/>

@@ -1,14 +1,17 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/icon/Logo.svg';
 import Call from '../../assets/icon/Call.svg';
 import Corz from '../../assets/icon/Corz.svg';  
 import Like from '../../assets/icon/Like.svg';
 import { NavLink } from 'react-router';
+import { themeContext } from '../../providers/theme';
 import '../../scss/style.css';
 
 export default function Header(){ 
 
+const [theme, toggleTheme] = useContext(themeContext)
+console.log(theme)
 const [dropdownMenu, setdropdownMenu] = useState(false);
 const [select, setSelect] = useState();
 const [DropdownName, setDropdownName] = useState();
@@ -28,8 +31,12 @@ const onClickSelect = (index) => {
     setdropdownMenu(false);
 }
 
+const onClickTheme = ()=>{
+    toggleTheme()
+}
+
     return(
-        <header className="header"> 
+        <header className={`header header__${theme}`}> 
         
         <a href="" className="header_logo">
             <img src={Logo} alt="" className="header_logo-image" width="50" height="42" loading="lazy"/>
@@ -70,16 +77,17 @@ const onClickSelect = (index) => {
        
         <div className="header_menu-action">
 
-             <a href="/" className="header_menu-number">
+             <a href="" className="header_menu-number">
                 <img src={Call} alt="" className="header_logo-image" width="20" height="20"/>
                  +992(922) 34 45</a>
-            <a href="/" className="header_logo-icon">
+            <NavLink to ="/Избранное" className="header_logo-icon">
                 <img src={Corz} alt="" className="header_logo-image" width="32" height="32" loading="lazy"/>
-            </a>
-            <a href="/" className="header_logo-icon">
+            </NavLink>
+            <NavLink to = "/Корзина" className="header_logo-icon">
                 <img src={Like} alt="" className="header_logo-image" width="32" height="32" loading="lazy"/>
-            </a>
-       
+            </NavLink>
+
+       <button className='themeButton' onClick={onClickTheme}>{theme === "light"? "Светлая":"Темная"}</button>
         </div>
 
     </header>

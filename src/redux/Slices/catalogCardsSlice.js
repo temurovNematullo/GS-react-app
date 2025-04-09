@@ -62,7 +62,7 @@ const catalogCArdsReducer = createSlice({
 
 export const fetchCatalogData = createAsyncThunk(
   "catalogCards/fetchCatalogData",
-  async (_, { getState, dispatch }) => {
+  async (title, { getState, dispatch }) => {
     try {
       dispatch(setStatus("loading"));
 
@@ -72,7 +72,13 @@ export const fetchCatalogData = createAsyncThunk(
       // if (totalPage === 1) {
       //   await dispatch(fetchTotalPages());
       // }
-      const data = await catalogAPI.getCatalogCards(page, limit, sortBy, order);
+      const data = await catalogAPI.getCatalogCards(
+        page,
+        limit,
+        sortBy,
+        order,
+        title
+      );
       console.log("Данные из API:", data);
 
       dispatch(setCatalogCardsData(data));

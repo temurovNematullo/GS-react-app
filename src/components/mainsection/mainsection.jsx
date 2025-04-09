@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../scss/style.css';
 import Left from '../../assets/icon/Left.svg';
 import Right from '../../assets/icon/Right.svg';
 import Preloader from '../../assets/preloader/Preloader';
 import { fetchMainProducts, setMainProductId } from '../../redux/Slices/mainPageProductSlice';
-
+import { themeContext } from '../../providers/theme';
 
 export default function Mainsection() {
+const [theme] = useContext(themeContext)
 
 const {mainProducts, id} = useSelector((state)=> state.mainPageProductReducer)
 console.log(mainProducts)
@@ -53,7 +54,7 @@ console.log(mainProducts)
 
     return (
         <>
-            <section className="product">
+            <section className={`product product__${theme}`}>
                 <button className="arrow left" onClick={prevLock}>
                     <img src={Left} alt="Left" />
                 </button>

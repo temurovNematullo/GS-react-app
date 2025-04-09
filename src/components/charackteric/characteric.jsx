@@ -148,17 +148,19 @@ useEffect(()=>{
                
              </ul>
             
-             <div class="price_charackter">
+             <div  class="price_charackter">
                 <span class="current-price">{charactericItem.newPrice}</span>
                 <span class="old-price">    {charactericItem.oldPrice}</span>
             </div>
               <div class="like_row">
 
             <button class="buy-button_charakter">Купить</button>
-            <a href="/" class="charackter_logo-icon">
+            <NavLink to="/Избранное" class="charackter_logo-icon">
                 <img src={like} alt="" class="charackter_logo-image" width="17" height="15" loading="lazy"/>
-            </a>
-            <a href="" class="addlike">В избраное</a>
+                
+                <span class="addlike">В избраное</span>
+            </NavLink>
+         
     </div>
 
     <div class="accordeon">

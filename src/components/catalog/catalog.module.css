@@ -1,6 +1,7 @@
 .catalog__List{
-    padding-top: 90px; 
-    padding-right: 100px;   
+    padding-top: 50px; 
+    padding-right: 100px;  
+    scroll-snap-align: start;
   }
   .catalog_header h2{
     font-size: 28px;
@@ -11,6 +12,7 @@
     display: flex;
     padding-left: 100px;
     padding-bottom: 32px;
+    column-gap: 15px;
   }
   
   .reset_filters > *:nth-child(2) {
@@ -20,7 +22,6 @@
   .reset_filters > *:last-child {
     margin-left: auto; /* Последний элемент уходит в конец */
   }
-  
   
   .reset_filters__button{
     width: 290px;
@@ -92,12 +93,6 @@
     text-align: center;
 }
 
-.inputs {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  
   .inputs input {
     width: 113px;
     height: 45px;
@@ -109,68 +104,7 @@
   .inputs input:focus{
     border-color: var(--color-button-hover);
   }
-  .slider_container {
-    position: relative;
-    width: 100%;
-    height: 30px;
-  }
   
-  
-  
-  .slider_container input[type="range"] {
-    position: absolute;
-    width: 100%;
-    -webkit-appearance: none;
-    background: none;
-    pointer-events: none;
-  }
-  
-  .slider_container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    background:white;
-    cursor: pointer;
-    pointer-events: auto;
-    border-radius: 8%;
-    border: solid 2px var(--color-button-hover);
-    transform: translateY(-2px);
-  
-  }
-  
-  /* Двигаем ЛЕВЫЙ ползунок влево */
-  #minRange::-webkit-slider-thumb {
-    position: relative;
-    left: -3px; 
-  }
-  
-  .slider_container .slider-track {
-    position: absolute;
-    height: 5px;
-    background: var(--color-button-hover);
-    top: 50%;
-    left: 0;
-    right: 0;
-    border-radius: 10%;
-    transform: translateY(-50%);
-    z-index: -1; /* Этот элемент будет выше */
-    margin-top: 10px;
-  }
-  
-  .slider_container::before {
-    content: "";
-    position: absolute;
-    height: 5px;
-    background: var(--color-base); /* Серый фон */
-    top: 50%;
-    left: 0;
-    right: 0;
-    border-radius: 2px;
-    transform: translateY(-50%);
-    z-index: -2; /* Этот элемент будет ниже */
-    margin-top: 10px;
-  }
   
 .features {
     padding: 0;
@@ -231,6 +165,10 @@
     padding: 0;
     justify-content: end;
     margin-bottom: 160px; 
+    max-height: 500px; 
+    overflow-y: auto;  
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
   }
 /* Верхние метки */
 .product_card__labels {
