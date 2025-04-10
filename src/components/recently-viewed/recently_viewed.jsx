@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
 import Preloader from '../../assets/preloader/Preloader';
 import have from '../../assets/img/have.svg'
 import donthave from '../../assets/img/donthave.svg'
 import podarok from '../../assets/img/podaroc.svg'
-import { getRecentlyViewed } from "../../redux/Slices/recentlyViewedSlice";
+import { getRecentlyViewed, deleteRecentlyCards } from "../../redux/Slices/recentlyViewedSlice";
 import { useHorizontalScroll } from '../../assets/customHooks/useHorizontalScroll';
 import style from "../catalog/catalog.module.css"
+import { themeContext } from '../../providers/theme';
 
  function RecentlyVeiwed (){
   const dispatch = useDispatch()
+  const [theme] = useContext(themeContext)
   const {recentlyViewed, status} = useSelector(state=> state.recentlyViewedReducer)
  const {scrollLeft, scrollRight, listRef} = useHorizontalScroll()
 
@@ -19,7 +21,7 @@ import style from "../catalog/catalog.module.css"
   }, [])
 
     return(
-        <section class="productcard">
+        <section class={`productcard productcard__${theme}`}>
         <h2 class="productcar_header">Вы недавно просмотрели
         <div class="productcard-scrol">
             <button class="productcard-left" onClick={scrollLeft}></button>
@@ -28,7 +30,7 @@ import style from "../catalog/catalog.module.css"
     </h2>
         <ul ref={listRef} class="Cartochka" id="productCards">
           
-        {status === "loading" ? <Preloader/> : recentlyViewed.map((cardInfo) => ( <li key={cardInfo.id} className={style.product_card}>
+        {status === "loading" ? <Preloader/> : [...recentlyViewed].reverse().map((cardInfo) => ( <li key={cardInfo.id} className={style.product_card}>
         
                        <div className={style.product_card__labels}>
                        {cardInfo.status ? <> <img src={have} alt="В наличии" />
@@ -53,6 +55,7 @@ import style from "../catalog/catalog.module.css"
                                <span className={style.product_card__new_price}>{cardInfo.newPrice}</span>
                                <span className={style.product_card__old_price}>{cardInfo.oldPrice}</span>
                            </div>
+                           <button onClick={()=>dispatch(deleteRecentlyCards(cardInfo.id))}>Удалить из недавних</button>
                        </div>
                    </li>  ))}
         </ul>

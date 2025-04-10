@@ -24,7 +24,9 @@
  :where(blockquote, figure):where([class]) {
    margin: 0;
  }
- 
+ .mainButton{
+  background-color: var(--color-button);
+ }
  /**
    Убираем внешние отступы вертикали нужным тегам,
    у которых есть атрибут class
@@ -235,7 +237,8 @@
     --backgraund-color: rgb(242, 248, 255);
     --transition-duration: 0.2s;
     --fond-size-base: 14px;
-
+    --backgraund-color-dark1: rgb(15, 15, 51);
+    --backgraund-color-dark2: rgb(34, 42, 70);
 }
 body{
     font-family: var(--font-family-base);
@@ -290,7 +293,7 @@ h1,h2,h3,h4,h5,h6{
 
 .header__dark,
 .header__dark * {
-  background-color: var(--color-footer);
+  background-color: rgb(15, 15, 51);
   color: whitesmoke;
 }
 
@@ -363,7 +366,25 @@ h1,h2,h3,h4,h5,h6{
   background-color: var(--color-button-hover);
 }
 
+.category__dark
+{
+  background-color: var(--backgraund-color-dark2);
+  color: white;
+}
+.category_item__dark{
+background-color: var(--backgraund-color-dark1);
+}
+.category_text__dark{
+  color: white;
+  }
 
+  .category_Img{
+    margin-left: 20%;
+    width: 70%;
+    height: 80%;
+    z-index: 1;
+  }
+  
 .sale {
   display: flex;
   justify-content: space-between; /* Распределение элементов */
@@ -558,10 +579,15 @@ h3{
   opacity: 0.7;
 }
 
+.whyGS__dark{
+  background-color: rgb(34, 42, 70);
+  color: white;
+}
+
 .whyGS-title{
   text-align: center;
-  margin-top: 95px;
-  margin-bottom: 50px;
+  padding-top: 95px;
+  padding-bottom: 50px;
 }
 
 .whyGS_info-list{
@@ -571,7 +597,7 @@ h3{
   padding-inline: 100px;
 }
 
-.whyGS_info-item{
+.WhyInfo{
   display: flex; 
   flex-direction: column; 
   align-items: center; 
@@ -582,18 +608,27 @@ h3{
   border-right: solid 2px var(--color-lightgray);
 }
 
-.whyGS_info-text{
+.WhyText{
   font-size: 20px;
   text-align: center;
   padding-top: 35px;
   color: var(--color-lightgray);
 }
 
+.whyGS_info__dark{
+
+  border-left: solid 2px  white;
+  border-right: solid 2px white;
+}
+
+.whyGS_infoText__dark{
+  color: white;
+}
 
 .category {
   text-align: center;
-  margin-top: 95px;
-  margin-bottom: 65px;
+  padding-top: 95px;
+  padding-bottom: 65px;
 }
 
 .category-title{
@@ -627,9 +662,8 @@ h3{
   background-size: cover;
   background-position: center;
   color: var(--color-lightgray);
-  position: relative;
-  background-image: url(../assets/img/фото.svg);
-  
+  position: relative; 
+  z-index: 5;
 }
 
 .category_info-text {
@@ -637,13 +671,20 @@ h3{
   font-weight: 400;
 }
 
-.category_info-button {
+.category_info__button {
   background: transparent;
   color: black;
   border: solid 2px var(--color-lightgray);
   padding: 10px 20px;
   cursor: pointer;
   margin-top: 10px;
+}
+
+.category_info__button_dark {
+  background: transparent;
+  color: white;
+  border: solid 2px lightblue;
+ 
 }
 
 .category-button {
@@ -657,6 +698,9 @@ h3{
   max-width: 250px;
 }
 
+.popular_product__dark{
+  background-color: var(--backgraund-color-dark1);
+}
 
 .popular_product-title, .productcar_header {
   display: flex;
@@ -665,6 +709,10 @@ h3{
   gap: 15px; /* Отступ между текстом и кнопками */
   padding-inline: 100px;
   padding-bottom: 50px;
+}
+
+.productcard__dark{
+  background-color: var(--backgraund-color-dark1);
 }
 
 .popular_product-scrol, .productcard-scrol {
@@ -679,7 +727,6 @@ h3{
   background: none;
   border: none;
   cursor: pointer;
-  
 }
 
 .productcard-left{
@@ -2420,6 +2467,8 @@ height: 180px;
   .banner_info-number{
     font-size: 24px;
   }
+
+
 
   .popular_product-title {
     font-size: 22px;

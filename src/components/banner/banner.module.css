@@ -1,8 +1,15 @@
-.banner {
+ .banner__light {
     width: auto;
     background-color: var(--backgraund-color);
   }
   
+  .banner__dark,
+  .banner__dark * {
+    background-color: rgb(15, 15, 51);
+    color: white;
+  }
+
+
   .banner_info {
     max-width: 1200px; /* Ограничиваем ширину на больших экранах */
     padding-inline: 320px; /* Отступы по бокам */
@@ -34,9 +41,15 @@
     font-weight: bold;
   }
   
-  .banner_info_text {
+  .banner_info__light {
     display: block;
     font-size: 14px;
     margin-top: 16px;
     color: var(--color-lightgray);
+  }
+  .banner_info__dark {
+    display: block;
+    font-size: 14px;
+    margin-top: 16px;
+    color: white;
   }

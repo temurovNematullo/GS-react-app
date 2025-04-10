@@ -48,5 +48,17 @@ export const getRecentlyViewed = createAsyncThunk(
   }
 );
 
+export const deleteRecentlyCards = createAsyncThunk(
+  "recently/deleteRecentlyCards",
+  async (productId, { dispatch }) => {
+    try {
+      await catalogAPI.deleteRecentlyCards(productId);
+      dispatch(getRecentlyViewed());
+    } catch (error) {
+      console.error("error", error);
+    }
+  }
+);
+
 export const { setRecentlyViewed } = recentlyViewedSlice.actions;
 export default recentlyViewedSlice.reducer;

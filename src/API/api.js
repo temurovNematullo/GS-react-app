@@ -69,6 +69,11 @@ export const catalogAPI = {
       .post("recentlyViewed", recentlyCard)
       .then((response) => response.data);
   },
+  deleteRecentlyCards(id) {
+    return instance3
+      .delete(`recentlyViewed/${id}`)
+      .then((response) => response.data);
+  },
   getRecentlyViewed() {
     return instance3.get("recentlyViewed").then((response) => response.data);
   },

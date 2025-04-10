@@ -1,12 +1,14 @@
 import "../../scss/style.css";
 import { NavLink } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect} from "react";
+import { useContext, useEffect} from "react";
 import { fetchPopularProduct } from "../../redux/Slices/popularProductSlice";
 import { useHorizontalScroll } from "../../assets/customHooks/useHorizontalScroll";
+import { themeContext } from "../../providers/theme";
 
 export default function Popular_products(){
     const dispatch = useDispatch()
+    const [theme] = useContext(themeContext)
     const {products} = useSelector(state=> state.popularProductsReducer)  
 const {scrollLeft, scrollRight, listRef} = useHorizontalScroll()
     useEffect(()=> {
@@ -14,7 +16,7 @@ const {scrollLeft, scrollRight, listRef} = useHorizontalScroll()
     },[])
 
     return (
-      <section class="popular_product">
+      <section class={`popular_product popular_product__${theme}`}>
 
       <h2 class="popular_product-title">
           Наши популярные продукты

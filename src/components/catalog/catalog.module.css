@@ -52,7 +52,7 @@
 
       .conteiner_filter{
         display: flex;
-        column-gap: 100px;
+        column-gap: 30px;
         padding-left: 100px;
       }
       .filter_accordeonConteiner{
@@ -159,7 +159,7 @@
   }
   .catalog_list {
     display: grid;
-    grid-template-columns: repeat(3, 290px); /* 3 столбца по 290px */
+    grid-template-columns: repeat(3, 1fr); 
     row-gap: 30px;
     column-gap: 30px;
     padding: 0;

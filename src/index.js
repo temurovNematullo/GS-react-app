@@ -6,16 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import { Theme } from "./providers/theme";
+import { ThemeContext } from "./providers/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <HashRouter>
-        <Theme>
+        <ThemeContext>
           <App />
-        </Theme>
+        </ThemeContext>
       </HashRouter>
     </Provider>
   </React.StrictMode>
