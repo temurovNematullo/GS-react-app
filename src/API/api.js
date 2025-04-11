@@ -72,7 +72,10 @@ export const catalogAPI = {
   deleteRecentlyCards(id) {
     return instance3
       .delete(`recentlyViewed/${id}`)
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
   },
   getRecentlyViewed() {
     return instance3.get("recentlyViewed").then((response) => response.data);
@@ -94,5 +97,16 @@ export const charactericAPI = {
         console.error("Ошибка в API-запросе:", error);
         throw error;
       });
+  },
+};
+
+export const registrationAPI = {
+  postUserData(formData) {
+    return instance4
+      .post("usersData", formData)
+      .then((response) => response.data);
+  },
+  getUsersData() {
+    return instance4.get("usersData").then((response) => response.data);
   },
 };

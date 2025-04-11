@@ -6,6 +6,7 @@ import popularProductsReducer from "./Slices/popularProductSlice";
 import reviewsReducer from "./Slices/reviewsSlice";
 import recentlyViewedReducer from "./Slices/recentlyViewedSlice";
 import charactericReducer from "./Slices/charactericSlice";
+import registrationReducer from "./Slices/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     reviewsReducer,
     recentlyViewedReducer,
     charactericReducer,
+    registrationReducer,
   },
 });
