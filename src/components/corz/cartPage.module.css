@@ -1,0 +1,27 @@
+.cartImage {
+  width: 10%;
+  height: auto;
+  border-radius: 10px;
+}
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.cartItemDetails {
+  display: flex;
+  flex-direction: row;
+  column-gap: 40px;
+  align-items: start;
+  padding-inline: 100px;
+}
+.cartItemQuantity {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  column-gap: 10px;
+}

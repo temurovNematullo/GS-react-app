@@ -10,7 +10,6 @@ export default function AuthForm() {
   const dispatch = useDispatch();
   const [authError, setAuthError] = useState();
   const { setUser } = useContext(themeContext);
-
   const {
     register,
     handleSubmit,

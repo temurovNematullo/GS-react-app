@@ -7,6 +7,7 @@ import reviewsReducer from "./Slices/reviewsSlice";
 import recentlyViewedReducer from "./Slices/recentlyViewedSlice";
 import charactericReducer from "./Slices/charactericSlice";
 import registrationReducer from "./Slices/authSlice";
+import cartReducer from "./Slices/cartSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     recentlyViewedReducer,
     charactericReducer,
     registrationReducer,
+    cartReducer,
   },
 });
