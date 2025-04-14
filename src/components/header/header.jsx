@@ -6,10 +6,10 @@ import Corz from "../../assets/icon/Corz.svg";
 import Like from "../../assets/icon/Like.svg";
 import { NavLink } from "react-router";
 import { themeContext } from "../../providers/theme";
-
+import style from "./header.module.css";
 import "../../scss/style.css";
 
-export default function Header() {
+export default function Header({ setIsCartOpen }) {
   const { theme, toggleTheme, user } = useContext(themeContext);
   const [dropdownMenu, setdropdownMenu] = useState(false);
   const [select, setSelect] = useState();
@@ -126,7 +126,7 @@ export default function Header() {
       </nav>
 
       <div className="header_menu-action">
-        <a href="" className="header_menu-number">
+        <NavLink to="" className="header_menu-number">
           <img
             src={Call}
             alt=""
@@ -135,7 +135,7 @@ export default function Header() {
             height="20"
           />
           +992(922) 34 45
-        </a>
+        </NavLink>
         <NavLink to="/Избранное" className="header_logo-icon">
           <img
             src={Corz}
@@ -146,7 +146,7 @@ export default function Header() {
             loading="lazy"
           />
         </NavLink>
-        <NavLink to="/Корзина" className="header_logo-icon">
+        <span onClick={() => setIsCartOpen(true)} className="header_logo-icon">
           <img
             src={Like}
             alt=""
@@ -155,7 +155,7 @@ export default function Header() {
             height="32"
             loading="lazy"
           />
-        </NavLink>
+        </span>
         {user ? (
           user.name
         ) : (
@@ -168,10 +168,11 @@ export default function Header() {
             </NavLink>
           </>
         )}
-
-        <button className="themeButton" onClick={onClickTheme}>
-          {theme === "light" ? "Светлая" : "Темная"}
-        </button>
+        <div onClick={onClickTheme} className={style.buttonContainer}>
+          <button className={style.themeButton}>
+            {theme === "light" ? "Светлая" : "Темная"}
+          </button>
+        </div>
       </div>
     </header>
   );

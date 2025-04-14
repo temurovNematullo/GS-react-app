@@ -1,0 +1,13 @@
+.themeButton {
+  all: unset;
+  background-color: white;
+}
+.buttonContainer {
+  display: flex;
+  width: 10vh;
+  height: 5vh;
+  border: 2px solid lightblue;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+}

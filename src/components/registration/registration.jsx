@@ -17,7 +17,7 @@ export default function Registration() {
   } = useForm();
 
   const onSubmit = (data) => {
-    if (usersData?.some((item) => item.email !== data.email)) {
+    if (!usersData?.some((item) => item.email === data.email)) {
       dispatch(postUserData(data));
       reset();
     } else {

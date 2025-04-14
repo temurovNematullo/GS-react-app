@@ -10,6 +10,7 @@ import CharactericPage from "./pages/CharactericPage";
 import RegistForm from "./components/registration/registration";
 import AuthForm from "./components/auth/authForm";
 import { useEffect } from "react";
+import { useState } from "react";
 import CartPage from "./components/corz/cartPage";
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <div className="App">
-      <Header />
+      <Header setIsCartOpen={setIsCartOpen} />
       <Routes>
         <Route path="/" element={<Navigate to="/Главная" />} />
         <Route path="/Главная" element={<Main />} />
@@ -30,8 +33,8 @@ function App() {
         <Route path="/authForm" element={<AuthForm />} />
         <Route path="/Каталог" element={<CatalogPage />} />
         <Route path="/Каталог/:id" element={<CharactericPage />} />
-        <Route path="/Корзина" element={<CartPage />} />
       </Routes>
+      <CartPage isOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
       <Feedback />
 
       <Footer />

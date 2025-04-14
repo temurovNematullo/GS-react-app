@@ -25,36 +25,76 @@ export const cartSlice = createSlice({
         state.cartItems[existingItemIndex].quantity += 1;
       }
     },
-    addQuantity(state, action) {
-      const productId = action.payload;
-      const existingItemIndex = state.cartItems.findIndex(
+    // addQuantity(state, action) {
+    //   const productId = action.payload;
+    //   const existingItemIndex = state.cartItems.findIndex(
+    //     (item) => item.productId === productId
+    //   );
+    //   if (existingItemIndex !== -1) {
+    //     state.cartItems[existingItemIndex].quantity += 1;
+    //   }
+    // },
+    // deleteQuantity(state, action) {
+    //   const productId = action.payload;
+    //   const existingItemIndex = state.cartItems.findIndex(
+    //     (item) => item.productId === productId
+    //   );
+    //   if (existingItemIndex !== -1) {
+    //     if (state.cartItems[existingItemIndex].quantity > 1) {
+    //       state.cartItems[existingItemIndex].quantity -= 1;
+    //     }
+    //   }
+    // },
+    // deleteItem(state, action) {
+    //   const productId = action.payload;
+    //   const deleteItemIndex = state.cartItems.findIndex(
+    //     (item) => item.productId === productId
+    //   );
+    //   state.cartItems.splice(deleteItemIndex, 1);
+    // },
+    updateQuantity(state, action) {
+      const { type, productId } = action.payload;
+      const findProduct = state.cartItems.find(
         (item) => item.productId === productId
       );
-      if (existingItemIndex !== -1) {
-        state.cartItems[existingItemIndex].quantity += 1;
+      if (!findProduct) return;
+
+      if (type === "quantityPlus") {
+        findProduct.quantity += 1;
       }
-    },
-    deleteQuantity(state, action) {
-      const productId = action.payload;
-      const existingItemIndex = state.cartItems.findIndex(
-        (item) => item.productId === productId
-      );
-      if (existingItemIndex !== -1) {
-        if (state.cartItems[existingItemIndex].quantity > 1) {
-          state.cartItems[existingItemIndex].quantity -= 1;
+      if (type === "quantityMinus") {
+        findProduct.quantity -= 1;
+
+        if (findProduct.quantity <= 0) {
+          state.cartItems = state.cartItems.filter(
+            (item) => item !== findProduct
+          );
         }
       }
+      if (type === "deleteProduct") {
+        state.cartItems = state.cartItems.filter(
+          (item) => item !== findProduct
+        );
+      }
     },
-    deleteItem(state, action) {
-      const productId = action.payload;
-      const deleteItemIndex = state.cartItems.findIndex(
+    updateQuantityValue(state, action) {
+      const { productId, quantity } = action.payload;
+      const findProduct = state.cartItems.find(
         (item) => item.productId === productId
       );
-      state.cartItems.splice(deleteItemIndex, 1);
+      if (!findProduct) return;
+
+      findProduct.quantity = quantity;
     },
   },
 });
 
-export const { addTocards, addQuantity, deleteQuantity, deleteItem } =
-  cartSlice.actions;
+export const {
+  addTocards,
+  addQuantity,
+  deleteQuantity,
+  deleteItem,
+  updateQuantity,
+  updateQuantityValue,
+} = cartSlice.actions;
 export default cartSlice.reducer;
