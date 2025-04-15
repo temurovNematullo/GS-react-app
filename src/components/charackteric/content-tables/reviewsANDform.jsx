@@ -21,6 +21,7 @@ export default function ReviewsAndForm() {
   const rating = [1, 2, 3, 4, 5];
   const reviewsCount = reviews?.length || 0;
   const [selectedStars, setSelectedStars] = useState();
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     dispatch(fetchReviews(productId.id));
@@ -36,6 +37,9 @@ export default function ReviewsAndForm() {
   const handleClick = (ratingItem) => {
     setSelectedStars(ratingItem);
   };
+
+  const openModal = (item) => setSelectedItem(item);
+  const closeModal = () => setSelectedItem(null);
 
   const onSubmit = (data) => {
     const reviewsData = {
@@ -59,7 +63,35 @@ export default function ReviewsAndForm() {
                 {reviews.map((item) => (
                   <div class="tables--reviews__list">
                     <div class="reviews--head">
-                      <p class="reviews--clientName">{item.name}</p>
+                      <>
+                        {/* Основной блок с аватаром и именем */}
+                        <div className="reviewsUser">
+                          <img
+                            onClick={() => setSelectedItem(item)} // открывает модалку
+                            className="avatarReview"
+                            src={item.avatar}
+                            alt="avatar"
+                          />
+                          <p className="reviews--clientName">{item.name}</p>
+                        </div>
+
+                        {/* Модалка с увеличенным аватаром */}
+                        {selectedItem && (
+                          <div className="modalOverlay" onClick={closeModal}>
+                            <div
+                              className="modalContent"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <img
+                                src={selectedItem.avatar}
+                                className="modalImage"
+                                alt="zoomed avatar"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </>
+
                       <time datetime="2021-08-20">{item.date}</time>
 
                       <div class="reviews--star">

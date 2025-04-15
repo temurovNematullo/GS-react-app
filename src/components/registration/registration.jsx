@@ -22,6 +22,9 @@ export default function Registration() {
       reset();
     } else {
       setError("Пользователь с этим email уже зарегистрирован)");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
 
@@ -63,7 +66,7 @@ export default function Registration() {
       />
       {errors.password && <p>{errors.password.message}</p>}
       <span>{error}</span>
-      <button className={style.submit_registForm} onClick={onsubmit}>
+      <button type="submit" className={style.submit_registForm}>
         Отправить
       </button>
     </form>

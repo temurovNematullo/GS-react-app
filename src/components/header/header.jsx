@@ -157,7 +157,10 @@ export default function Header({ setIsCartOpen }) {
           />
         </span>
         {user ? (
-          user.name
+          <div className={style.userContainer}>
+            <span>{user.name}</span>
+            <img className={style.userAvatar} src={user.avatar} />
+          </div>
         ) : (
           <>
             <NavLink className="registFormLink" to="/registrationForm">

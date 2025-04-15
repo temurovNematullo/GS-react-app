@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { themeContext } from "../../providers/theme";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./cartPage.module.css";
 import ReactDOM from "react-dom";
@@ -12,6 +13,8 @@ import {
 
 function CartPage({ isOpen, setIsCartOpen }) {
   const { cartItems } = useSelector((state) => state.cartReducer);
+  const { theme } = useContext(themeContext);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +28,10 @@ function CartPage({ isOpen, setIsCartOpen }) {
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <div className={style.overlay} onClick={() => setIsCartOpen(false)}>
-      <div className={style.modal} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`${style.modal} ${style[`modal__${theme}`]}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2>Корзина</h2>
         <div className={style.scrollByY}>
           {cartItems.length > 0 ? (
@@ -55,13 +61,15 @@ function CartPage({ isOpen, setIsCartOpen }) {
                           -
                         </button>
                         <input
+                          className={style.cartInput}
                           type="number"
-                          value={item.quantity}
+                          value={item.quantity ? item.quantity : 0}
                           onChange={(e) =>
                             dispatch(
-                              updateQuantityValue({
+                              updateQuantity({
                                 productId: item.productId,
                                 quantity: e.target.value,
+                                type: "valueQuantity",
                               })
                             )
                           }

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
-  totalPrice: null,
 };
 
 export const cartSlice = createSlice({
@@ -25,6 +24,7 @@ export const cartSlice = createSlice({
         state.cartItems[existingItemIndex].quantity += 1;
       }
     },
+
     // addQuantity(state, action) {
     //   const productId = action.payload;
     //   const existingItemIndex = state.cartItems.findIndex(
@@ -52,8 +52,9 @@ export const cartSlice = createSlice({
     //   );
     //   state.cartItems.splice(deleteItemIndex, 1);
     // },
+
     updateQuantity(state, action) {
-      const { type, productId } = action.payload;
+      const { type, productId, quantity } = action.payload;
       const findProduct = state.cartItems.find(
         (item) => item.productId === productId
       );
@@ -76,15 +77,9 @@ export const cartSlice = createSlice({
           (item) => item !== findProduct
         );
       }
-    },
-    updateQuantityValue(state, action) {
-      const { productId, quantity } = action.payload;
-      const findProduct = state.cartItems.find(
-        (item) => item.productId === productId
-      );
-      if (!findProduct) return;
-
-      findProduct.quantity = quantity;
+      if (type === "valueQuantity") {
+        findProduct.quantity = quantity;
+      }
     },
   },
 });
@@ -95,6 +90,5 @@ export const {
   deleteQuantity,
   deleteItem,
   updateQuantity,
-  updateQuantityValue,
 } = cartSlice.actions;
 export default cartSlice.reducer;
