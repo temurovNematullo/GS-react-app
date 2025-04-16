@@ -38,5 +38,17 @@ export const getUsersData = createAsyncThunk(
   }
 );
 
+export const putUserData = createAsyncThunk(
+  "userSlice/putUserData",
+  async ({ id, formData }, { dispatch }) => {
+    try {
+      await registrationAPI.putUserData(id, formData);
+      dispatch(getUsersData());
+    } catch (error) {
+      console.error("ERROR", error);
+    }
+  }
+);
+
 export const { getUserData } = userSliceReducer.actions;
 export default userSliceReducer.reducer;

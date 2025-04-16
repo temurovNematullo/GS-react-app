@@ -9,7 +9,7 @@ import { themeContext } from "../../providers/theme";
 import style from "./header.module.css";
 import "../../scss/style.css";
 
-export default function Header({ setIsCartOpen }) {
+export default function Header({ setIsCartOpen, setIsProfileOpen }) {
   const { theme, toggleTheme, user } = useContext(themeContext);
   const [dropdownMenu, setdropdownMenu] = useState(false);
   const [select, setSelect] = useState();
@@ -157,7 +157,7 @@ export default function Header({ setIsCartOpen }) {
           />
         </span>
         {user ? (
-          <div className={style.userContainer}>
+          <div className={style.userContainer} onClick={setIsProfileOpen}>
             <span>{user.name}</span>
             <img className={style.userAvatar} src={user.avatar} />
           </div>

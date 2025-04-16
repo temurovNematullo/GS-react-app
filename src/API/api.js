@@ -109,4 +109,9 @@ export const registrationAPI = {
   getUsersData() {
     return instance4.get("usersData").then((response) => response.data);
   },
+  putUserData(id, formData) {
+    return instance4
+      .put(`usersData/${id}`, formData)
+      .then((response) => response.data);
+  },
 };

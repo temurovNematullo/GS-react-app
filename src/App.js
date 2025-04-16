@@ -12,6 +12,7 @@ import AuthForm from "./components/auth/authForm";
 import { useEffect } from "react";
 import { useState } from "react";
 import CartPage from "./components/corz/cartPage";
+import UserProfile from "./components/profile/userProfile";
 
 function App() {
   const { pathname } = useLocation();
@@ -21,10 +22,13 @@ function App() {
   }, [pathname]);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
-
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   return (
     <div className="App">
-      <Header setIsCartOpen={setIsCartOpen} />
+      <Header
+        setIsCartOpen={setIsCartOpen}
+        setIsProfileOpen={setIsProfileOpen}
+      />
       <Routes>
         <Route path="/" element={<Navigate to="/Главная" />} />
         <Route path="/Главная" element={<Main />} />
@@ -35,8 +39,8 @@ function App() {
         <Route path="/Каталог/:id" element={<CharactericPage />} />
       </Routes>
       <CartPage isOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+      <UserProfile isOpen={isProfileOpen} setIsOpen={setIsProfileOpen} />
       <Feedback />
-
       <Footer />
     </div>
   );

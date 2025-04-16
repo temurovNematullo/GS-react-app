@@ -1,0 +1,50 @@
+.user_profile_overlay {
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+.user_modal {
+  position: relative;
+  width: 25%;
+  height: 100vh;
+  background-color: aliceblue;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  animation: modalIn 0.5s ease-out;
+  z-index: 1000;
+}
+
+.user_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  font-size: 20px;
+  align-items: start;
+  padding-top: 20px;
+  padding-inline: 20px;
+}
+.user_profile_image {
+  width: 80%;
+  height: 300px;
+  margin: 0 auto;
+}
+.user_profile_header h2 {
+  padding-inline: 50px;
+  font-weight: 500;
+  font-size: 34px;
+}
+@keyframes modalIn {
+  0% {
+    opacity: 0;
+    transform: transLateX(200px);
+  }
+  100% {
+    opacity: 1;
+    transform: transLateX(0);
+  }
+}
