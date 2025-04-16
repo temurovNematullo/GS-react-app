@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/GS-react-app/static/css/main.ad935a7e.css",
-    "main.js": "/GS-react-app/static/js/main.a5ee9cb5.js",
+    "main.css": "/GS-react-app/static/css/main.eaa1a0a9.css",
+    "main.js": "/GS-react-app/static/js/main.12be9842.js",
     "static/js/453.0874e7c3.chunk.js": "/GS-react-app/static/js/453.0874e7c3.chunk.js",
     "static/media/description.svg": "/GS-react-app/static/media/description.f6319ffb4d988eae4f413d4f9272a70a.svg",
     "static/media/SFProText-Light.woff2": "/GS-react-app/static/media/SFProText-Light.e829bc5ce2b39e90eae7.woff2",
@@ -19,8 +19,8 @@
     "static/media/star_empty.svg": "/GS-react-app/static/media/star_empty.63eb37ee7ed8f3d4d067.svg",
     "static/media/Call.svg": "/GS-react-app/static/media/Call.73dce661f06411a3996bff5282369dec.svg",
     "static/media/loading.svg": "/GS-react-app/static/media/loading.ac322186d51b0c02ffdd4f0774940571.svg",
-    "static/media/refresh.svg": "/GS-react-app/static/media/refresh.74ea40546a21ba7c20005c634d824d42.svg",
     "index.html": "/GS-react-app/index.html",
+    "static/media/refresh.svg": "/GS-react-app/static/media/refresh.74ea40546a21ba7c20005c634d824d42.svg",
     "static/media/Corz.svg": "/GS-react-app/static/media/Corz.dd8a9806da365c6f142dfd50098b2eb3.svg",
     "static/media/checked.svg": "/GS-react-app/static/media/checked.f391c404700180eb2106.svg",
     "static/media/donthave.svg": "/GS-react-app/static/media/donthave.5c3247137f372cc5eadd7de1f96ac154.svg",
@@ -29,12 +29,12 @@
     "static/media/have.svg": "/GS-react-app/static/media/have.e491c04a3d04d595adde0e7a01acc365.svg",
     "static/media/Left.svg": "/GS-react-app/static/media/Left.73c2a3bceb4f966646af059ec2b348e7.svg",
     "static/media/galochka.svg": "/GS-react-app/static/media/galochka.2d5f4fc66bbd557407df.svg",
-    "main.ad935a7e.css.map": "/GS-react-app/static/css/main.ad935a7e.css.map",
-    "main.a5ee9cb5.js.map": "/GS-react-app/static/js/main.a5ee9cb5.js.map",
+    "main.eaa1a0a9.css.map": "/GS-react-app/static/css/main.eaa1a0a9.css.map",
+    "main.12be9842.js.map": "/GS-react-app/static/js/main.12be9842.js.map",
     "453.0874e7c3.chunk.js.map": "/GS-react-app/static/js/453.0874e7c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad935a7e.css",
-    "static/js/main.a5ee9cb5.js"
+    "static/css/main.eaa1a0a9.css",
+    "static/js/main.12be9842.js"
   ]
 }
